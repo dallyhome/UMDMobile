@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Authorize Test</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <button ion-button (click)="getUserInfo()">
+  getUserInfo
+  </button>
+  <button ion-button (click)="verifyWithAppID()">
+  verifyWithAppId
+  </button>
+  <h3>result</h3>
+  <div>
+    {{apiResult}}
+  </div>
+  <h3>error</h3>
+  <div>
+    {{apiError}}
+  </div>
+</ion-content>

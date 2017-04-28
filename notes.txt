@@ -1,0 +1,6 @@
+adb install -r D:\Projects\ionic\UmdMobile.1\platforms\android\build\outputs\apk\android-debug.apk
+adb shell am start -n com.inx.app.umdmobile/com.inx.app.umdmobile.MainActivity
+
+W/ExtraInfo( 2934): info:com.inx.app.umdmobile.MainActivity@3d5f8327,testxxx,dGV
+zdHh4eHw1OENGNDg5QzEwMDA0Njk4fEIveWIrbHZ5WVVxRzZwZ1BuVXFtM2c9PTA4MDhuUjE4QW12WFF
+0MXE1VWNIQ0pvMVRBPT0wNjM1,0y8Vx8VcP0O2i2C7dnpnkA==
