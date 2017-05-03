@@ -1,6 +1,10 @@
 export class Group
 {
-    GroupId: string;
-    GroupName: string;
-    Description: string;
+    constructor()
+    {
+
+    }
+    groupId: string;
+    groupName: string;
+    description: string;
 }

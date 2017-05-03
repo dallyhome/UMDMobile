@@ -12,8 +12,10 @@ import { SubscribePage } from '../pages/subscribe/subscribe';
 import { TabsPage } from '../pages/tabs/tabs';
 import { PeopleSearchPage } from '../pages/people-search/people-search';
 import { MessageComponent } from '../component/message/message.component'
+import { GroupComponent } from '../component/group/group.component'
 import { MessageCategoryComponent } from '../component/message-category/message-category.component'
 import { MessageProvider } from '../mocks/providers/message-provider'
+import { GroupProvider } from '../mocks/providers/group-provider'
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { MessageProvider } from '../mocks/providers/message-provider'
     GroupEditPage,
     MessageComponent,
     MessageCategoryComponent,
+    GroupComponent,
     PeopleSearchPage, 
     TabsPage
   ],
@@ -47,6 +50,7 @@ import { MessageProvider } from '../mocks/providers/message-provider'
     PeopleSearchPage, 
     TabsPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, MessageProvider]
+
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, MessageProvider, GroupProvider]
 })
 export class AppModule {}

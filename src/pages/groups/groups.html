@@ -13,6 +13,6 @@
 
 <ion-content>
   <ion-list>
-    <ion-item ><button ion-button (click)="gotoEdit()">Group2</button></ion-item>
+    <group *ngFor="let group of groups" [group]="group" [navCtrl]="navCtrl"></group>
   </ion-list>
 </ion-content>

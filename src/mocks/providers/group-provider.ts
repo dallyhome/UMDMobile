@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Api } from '../../providers/api';
 import { Group } from '../../models/group';
-import { MESSAGES } from '../MESSAGES'
+import { GROUPS } from '../GROUPS'
 
 import 'rxjs/add/operator/map';
 
@@ -13,10 +13,13 @@ import 'rxjs/add/operator/map';
   for more info on providers and Angular 2 DI.
 */
 @Injectable()
-export class GropuProvider {
-  getGroup(owner: string) : Group[]
+export class GroupProvider {
+  constructor(public http: Http) {
+  }
+  
+  getGroups(owner: string) : Group[]
   {
-    return null;
+    return GROUPS;
   }
   updateGroup(user: string, group: Group) 
   {

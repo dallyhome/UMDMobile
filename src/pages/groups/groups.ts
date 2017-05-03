@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { MyApp } from '../../app/app.component';
-import { GroupEditPage } from '../group-edit/group-edit';
+import { GroupProvider } from '../../mocks/providers/group-provider'
+import { Group } from '../../models/group'
+import { GroupEditPage } from '../group-edit/group-edit'
 
 
 @Component({
@@ -9,9 +11,10 @@ import { GroupEditPage } from '../group-edit/group-edit';
   templateUrl: 'groups.html'
 })
 export class GroupsPage {
-  groupEditPage;
-  constructor(public navCtrl: NavController) {
-     this.groupEditPage = GroupEditPage;
+  groups : Group[] = [];
+
+  constructor(public navCtrl: NavController, public provider: GroupProvider) {
+    this.groups = provider.getGroups("");
   }
 
   gotoEdit()
