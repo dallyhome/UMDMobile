@@ -6,7 +6,7 @@ export class Subscribe
     {
 
     }
-    AlarmID: string;
-    CreateUserEmpId: string[];
-    AlarmActions: AlarmAction[];
+    alarmID: string;
+    createUserEmpId: string[];
+    alarmActions: AlarmAction[];
 }
