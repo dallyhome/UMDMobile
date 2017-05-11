@@ -20,6 +20,9 @@
       <button ion-item detail-none (click)="category = categoryMethod.ByEquipment" menuClose="menu1">
         Category By Equipment
       </button>
+      <button ion-item detail-none (click)="category = categoryMethod.ByAlarmType" menuClose="menu1">
+        Category By Alarm Type
+      </button>
     </ion-list>
   </ion-content>
 
@@ -32,7 +35,8 @@
       <button ion-button icon-only menuToggle="menu1">
         <ion-icon name="menu"></ion-icon>
       </button>
-    </ion-buttons><ion-title>訊息分類 - {{categoryMethod[category]}}</ion-title>
+      <!--</ion-buttons><ion-title>Message</ion-title>-->
+    </ion-buttons><ion-title>訊息分類-{{categoryMethod[category]}}</ion-title>
   </ion-navbar>
 
 </ion-header>

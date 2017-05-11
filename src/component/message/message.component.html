@@ -1,3 +1,8 @@
-    <ion-item text-wrap>
-        <ion-label>{{msg.body}}</ion-label><button item-right>11:10</button>
+    <!--<ion-item text-wrap>-->
+    <ion-item (click)="pushMsgDetailPage()">
+        <h2>{{msg.description}}</h2>
+        <!--<ion-label>{{msg.description}}</ion-label>-->
+        <p>{{msg.alarmMessage}}</p>
+        <ion-badge item-right>NEW</ion-badge>
+        <ion-badge item-right>{{msg.occurDT | date:'shortTime'}}</ion-badge>
     </ion-item>

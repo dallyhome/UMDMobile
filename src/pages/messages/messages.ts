@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { MenuController } from 'ionic-angular';
-import { MessageProvider } from '../../mocks/providers/message.provider'
+// import { MessageProvider } from '../../mocks/providers/message.provider'
 import { Message } from '../../models/message';
 @Component({
   selector: 'page-messages',

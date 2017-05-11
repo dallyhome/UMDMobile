@@ -1,5 +1,15 @@
 <ion-header>
-    <ion-title>編輯群組</ion-title>
+  <ion-navbar>  
+    <ion-title>
+      編輯群組
+    </ion-title>
+  </ion-navbar>
 </ion-header>
 <ion-content>
+ <ion-fab top right edge>
+    <button ion-fab  color="secondary" mini><ion-icon name="checkmark"></ion-icon></button>
+  </ion-fab>
+   <ion-list>
+      <group-edit [group]="group"></group-edit>
+ </ion-list>
 </ion-content>

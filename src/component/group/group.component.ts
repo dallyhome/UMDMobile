@@ -1,5 +1,6 @@
 import { Component, Input} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { GroupEditPage } from '../../pages/group-edit/group-edit'
 import { Group } from '../../models/group';
 
 @Component({
@@ -9,11 +10,16 @@ import { Group } from '../../models/group';
 export class GroupComponent
 {
     @Input()
-    group: Group;
+    groups : Group[] = [];
+    // group: Group;
     @Input()
     navCtrl: NavController;    
     constructor()
     {
     }
 
+    pushGroupEditPage(group): void
+    {
+        this.navCtrl.push(GroupEditPage, {'group': group})
+    }
 }

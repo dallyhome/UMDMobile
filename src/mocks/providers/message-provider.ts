@@ -14,6 +14,8 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class MessageProvider {
+  items;
+
   constructor(public http: Http) {
   }
   
@@ -39,4 +41,19 @@ export class MessageProvider {
   {
 
   }
+
+  // getItems(ev) {
+  //   // Reset items back to all of the items
+  //   this.getMessage();
+
+  //   // set val to the value of the ev target
+  //   var val = ev.target.value;
+
+  //   // if the value is an empty string don't filter the items
+  //   if (val && val.trim() != '') {
+  //     this.items = this.items.filter((item) => {
+  //       return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+  //     })
+  //   }
+  // }
 }

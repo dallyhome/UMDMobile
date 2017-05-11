@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { CategorizedMessagesPage } from '../categorized-messages/categorized-messages';
 import { SubscribePage } from '../subscribe/subscribe';
 import { GroupsPage } from '../groups/groups';
+import { ConfigPage } from '../config/config';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -14,6 +15,7 @@ export class TabsPage {
   tab1Root: any = CategorizedMessagesPage;
   tab2Root: any = SubscribePage;
   tab3Root: any = GroupsPage;
+  tab4Root: any = ConfigPage;
   constructor() {
 
   }

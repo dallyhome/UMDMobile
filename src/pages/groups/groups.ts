@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { MyApp } from '../../app/app.component';
 import { GroupProvider } from '../../mocks/providers/group-provider'
 import { Group } from '../../models/group'
@@ -17,7 +17,7 @@ export class GroupsPage {
     this.groups = provider.getGroups("");
   }
 
-  gotoEdit()
+  gotoEdit(): void
   {
       this.navCtrl.push(GroupEditPage);
   }

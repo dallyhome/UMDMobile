@@ -1,0 +1,11 @@
+<ion-card>
+  <ion-card-header>
+    {{msg.description}}
+  </ion-card-header>
+    <ion-item><p>Alarm ID:  {{msg.alarmID}}</p></ion-item>
+    <ion-item><p>Alarm 分類:  {{msg.alarmType}}</p></ion-item>
+    <ion-item><p>ALARM DATE:  {{msg.occurDT | date:'yyyy/MM/dd H:mm'}}</p></ion-item>
+    <ion-card-content padding>
+    Message: {{msg.alarmMessage}}
+  </ion-card-content>
+</ion-card>

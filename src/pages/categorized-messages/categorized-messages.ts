@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { MenuController } from 'ionic-angular';
-import { MessageProvider } from '../../mocks/providers/message-provider'
+import { MessageProvider } from '../../mocks/providers/message-provider';
 import { Message } from '../../models/message';
 import { CategorizedMessages } from '../../models/categorized-messages';
 import { MessagesPage } from '../messages/messages';
@@ -16,7 +16,8 @@ import { MessagesPage } from '../messages/messages';
 export enum CategoryMethod
 {
   ByAlarmID,
-  ByEquipment
+  ByEquipment,
+  ByAlarmType
 }
 
 
@@ -27,7 +28,7 @@ export enum CategoryMethod
 export class CategorizedMessagesPage {
   categoryMethod = CategoryMethod
   activeMenu : string = "menu1";
-  category : CategoryMethod = CategoryMethod.ByAlarmID;
+  category : CategoryMethod = CategoryMethod.ByAlarmType;
   messages : Message[] = [];
   categorizedMessage : CategorizedMessages[]
   constructor(public navCtrl: NavController, public navParams: NavParams, public menu: MenuController, public provider: MessageProvider) 
@@ -47,6 +48,8 @@ export class CategorizedMessagesPage {
           return 'alarmID';
       case CategoryMethod.ByEquipment:
           return 'eqptID';
+      case CategoryMethod.ByAlarmType:
+          return 'alarmType';
     }
   }
 }
