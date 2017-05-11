@@ -1,19 +1,17 @@
 import { Component, Input} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Group } from '../../models/group';
+import { Employee } from '../../models/employee';
 
 @Component({
-    selector: 'group',
-    templateUrl: './group.component.html'
+    selector: 'employee',
+    templateUrl: './employee.component.html'
 })
-export class GroupComponent
+export class EmployeeComponent
 {
     @Input()
     checked: Boolean = false;
     @Input()
-    group : Group;
-    @Input()
-    navCtrl: NavController;    
+    employee: Employee;
     constructor()
     {
     }

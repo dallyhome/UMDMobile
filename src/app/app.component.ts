@@ -3,7 +3,9 @@ import { Platform, Nav, AlertController } from "ionic-angular";
 import { Push, StatusBar, Splashscreen } from 'ionic-native';
 import { DetailsPage } from "../pages/details/details";
 import { TabsPage } from '../pages/tabs/tabs';
-import { PeopleSearchPage } from '../pages/people-search/people-search';
+//import { PeopleSearchPage } from '../pages/people-search/people-search';
+import { GroupSearchPage } from '../pages/group-search/group-search';
+import { ConfigPage } from '../pages/config/config';
 
 
 @Component({

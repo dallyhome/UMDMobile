@@ -1,6 +1,6 @@
-import { Component, Input} from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { Group } from '../../models/group';
+import { Component, Input, Output, EventEmitter } from '@angular/core'
+import { NavController, NavParams } from 'ionic-angular'
+import { Group } from '../../models/group'
 
 @Component({
     selector: 'group-edit',
@@ -9,13 +9,15 @@ import { Group } from '../../models/group';
 export class GroupEditComponent
 {
 
- @Input()
+    @Input()
     group: Group;
     @Input()
     navCtrl: NavController;    
+    @Output() editClick = new EventEmitter<Group>();
+    @Output() deleteClick = new EventEmitter<Group>();
     constructor()
     {
+
+
     }
-
-
 }

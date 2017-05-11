@@ -22,7 +22,7 @@
                       <p>{{group.description}}</p>
           </ion-item>-->
 
-     <group [groups]="groups" [navCtrl]="navCtrl"></group>
+     <group-edit *ngFor="let group of groups" [group]="group" (editClick)="gotoEdit($event)" (deleteClick)="doDelete($event)"></group-edit>
      <!--<group *ngFor="let group of groups" [group]="group" [navCtrl]="navCtrl"></group>-->
           <!--<ion-item-options side="right">
               <button ion-button color="danger">

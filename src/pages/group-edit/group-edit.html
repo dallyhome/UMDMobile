@@ -6,10 +6,29 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
- <ion-fab top right edge>
+  <ion-fab top right edge>
     <button ion-fab  color="secondary" mini><ion-icon name="checkmark"></ion-icon></button>
   </ion-fab>
-   <ion-list>
-      <group-edit [group]="group"></group-edit>
- </ion-list>
+  <ion-list>
+    <ion-item-group>
+      <ion-item-divider color="light">群組資訊</ion-item-divider>
+      <ion-item>
+        <ion-label >群組名稱</ion-label>
+        <ion-input type="text" placeholder="{{group == null || group.groupName == null || group.groupName == '' ? '' : group.groupName}}"></ion-input>
+      </ion-item> 
+      <ion-item>
+        <ion-label >描述</ion-label>
+        <ion-input type="text" placeholder="{{group == null || group.description == null || group.description == '' ? '' : group.description}}"></ion-input>
+      </ion-item>
+    </ion-item-group>
+
+    <ion-item-group  >
+      <ion-item-divider color="light">人員<button ion-button item-right><ion-icon name="add"></ion-icon> </button></ion-item-divider>
+      <ion-item *ngIf="group != null">Angola<button ion-button color="light" item-right><ion-icon name="remove"></ion-icon> </button></ion-item>
+      <ion-item *ngIf="group != null">Argentina<button ion-button color="light" item-right><ion-icon name="remove"></ion-icon> </button></ion-item>
+      <ion-item *ngIf="group != null">Armenia<button ion-button color="light" item-right><ion-icon name="remove"></ion-icon> </button></ion-item>
+      <ion-item *ngIf="group != null">Australia<button ion-button color="light" item-right><ion-icon name="remove"></ion-icon> </button></ion-item>
+      <ion-item *ngIf="group != null">Austria<button ion-button color="light" item-right><ion-icon name="remove"></ion-icon> </button></ion-item>
+    </ion-item-group>
+  </ion-list>
 </ion-content>

@@ -10,7 +10,6 @@
     <ion-title>{{pageTitle}}</ion-title>
     <ion-buttons end><button ion-button (click)="done()">Done</button></ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
@@ -22,6 +21,6 @@
     (ionCancel)="onCancel($event)">
   </ion-searchbar>
   <ion-list>
-    <employee *ngFor="let employee of employees" [employee]="employee" [checked]="selectedEmployee == employee" (click)="selectEmployee(employee)"></employee>
+    <group *ngFor="let group of groups" [group]="group" [navCtrl]="navCtrl" [checked]="selectedGroup == group" (click)="selectGroup(group)"></group>
   </ion-list>
 </ion-content>

@@ -13,13 +13,21 @@ import { GroupEditPage } from '../pages/group-edit/group-edit';
 import { SubscribePage } from '../pages/subscribe/subscribe';
 import { TabsPage } from '../pages/tabs/tabs';
 import { PeopleSearchPage } from '../pages/people-search/people-search';
+import { GroupSearchPage } from '../pages/group-search/group-search';
+import { DepartmentSelectPage } from '../pages/department-select/department-select';
 import { MessageComponent } from '../component/message/message.component'
 import { MessageDetailComponent } from '../component/message-detail/message-detail.component'
 import { GroupComponent } from '../component/group/group.component'
+import { EmployeeComponent } from '../component/employee/employee.component'
 import { GroupEditComponent } from '../component/group-edit/group-edit.component'
 import { MessageCategoryComponent } from '../component/message-category/message-category.component'
 import { MessageProvider } from '../mocks/providers/message-provider'
-import { GroupProvider } from '../mocks/providers/group-provider'
+import { MockGroupProvider } from '../mocks/providers/group-provider'
+import { IGroupService } from '../providers/igroup-service'
+import { IGeneralDataService } from '../providers/igeneral-data-service'
+import { MockEmployeeProvider } from '../mocks/providers/employee-provider'
+import { MockGeneralDataProvider } from '../mocks/providers/general-data-provider'
+import { IEmployeeService } from '../providers/iemployee-service'
 
 @NgModule({
   declarations: [
@@ -37,9 +45,13 @@ import { GroupProvider } from '../mocks/providers/group-provider'
     MessageDetailComponent,
     MessageComponent,
     MessageCategoryComponent,
+    EmployeeComponent,
     GroupComponent,
     GroupEditComponent,
     PeopleSearchPage, 
+    GroupSearchPage,
+    DepartmentSelectPage,
+    ConfigPage,
     TabsPage
   ],
   imports: [
@@ -58,9 +70,16 @@ import { GroupProvider } from '../mocks/providers/group-provider'
     GroupsPage,
     GroupEditPage,
     PeopleSearchPage, 
+    GroupSearchPage,
+    DepartmentSelectPage,
+    ConfigPage,
     TabsPage
   ],
 
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, MessageProvider, GroupProvider]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, 
+            , {provide: IGroupService, useClass: MockGroupProvider}
+            , {provide: IEmployeeService, useClass: MockEmployeeProvider}
+            , {provide: IGeneralDataService, useClass: MockGeneralDataProvider}
+            , MessageProvider]
 })
 export class AppModule {}

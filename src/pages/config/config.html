@@ -14,5 +14,10 @@
 
 
 <ion-content padding>
+<button ion-button (click)="testClick()">test</button>
+<ion-list>
+    <!--employee *ngFor="let employee of items" [employee]="employee" [checked]="false"></employee-->
+    <ion-item *ngFor="let department of items">{{department}}</ion-item>
+</ion-list>
 
 </ion-content>
