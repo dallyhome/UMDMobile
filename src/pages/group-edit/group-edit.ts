@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { MenuController } from 'ionic-angular';
-import { Group } from '../../models/group'
+import { Group } from '../../models/group';
+import { Employee } from '../../models/employee';
+import { PeopleSearchPage } from '../people-search/people-search';
+import { DepartmentSelectPage } from '../department-select/department-select';
 
 @Component({
   selector: 'page-group-edit',
@@ -9,8 +12,32 @@ import { Group } from '../../models/group'
 })
 export class GroupEditPage {
   group: Group
+  items: string[] = [];
+  // items: string[] = ['CIM'];
   constructor(public navCtrl: NavController, public navParams: NavParams, public menu: MenuController) {
     this.group = this.navParams.get('group');
+  }
+
+  SearchClick()
+  {
+   this.navCtrl.push(PeopleSearchPage, {'callback': this.callbackFunction, 'pageTitle': "選擇員工", 'filterEmployees': this.items})
+  }
+  
+  callbackFunction = (params) => 
+  {
+     return new Promise((resolve, reject) => {
+            if (params)
+            {
+//              this.groups.push(params);
+              this.items.push(params);
+            }
+            resolve();
+         });
+  }
+
+  doDelete(i): void
+  {
+   this.items.splice(i, 1);   
   }
 
 }

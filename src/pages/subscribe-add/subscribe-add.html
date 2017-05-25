@@ -1,0 +1,23 @@
+<ion-header>
+
+  <!--<ion-navbar>
+    <ion-title>{{category}}未訂閱清單</ion-title>
+  </ion-navbar>-->
+
+
+  <ion-navbar>
+    <ion-buttons end>
+      <button ion-button (click)="gotoConfig()" >訂閱
+        <!--<ion-icon name="checkmark"></ion-icon>-->
+      </button>
+      <!--</ion-buttons><ion-title>Message</ion-title>-->
+    </ion-buttons><ion-title>{{category}}未訂閱清單</ion-title>
+  </ion-navbar>
+
+
+</ion-header>
+
+<ion-content padding>
+ <ion-searchbar ></ion-searchbar>
+  <ion-item *ngFor="let alarmsubject of alarmsubjects"><ion-label>{{alarmsubject.alarmID}}</ion-label><ion-checkbox ></ion-checkbox></ion-item>
+</ion-content>

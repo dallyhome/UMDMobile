@@ -21,6 +21,7 @@ export class GroupSearchPage {
   selectedGroup : Group = null;
   constructor(public navCtrl: NavController, public navParams: NavParams, public provider: IGroupService) 
   {
+
     let filterGroups: Group[] = navParams.get("filterGroups");
     if (filterGroups)
     {

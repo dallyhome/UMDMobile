@@ -17,7 +17,6 @@ export class DepartmentSelectPage {
   pageTitle = "選擇部門";
   filterDepartmentIDs : Set<string> = new Set<string>();
   selectedDepartment: string;
-
   constructor(public navCtrl: NavController, public navParams: NavParams, public provider: IGeneralDataService) 
   {
     let filterDepartments: string[] = navParams.get("filterDepartments");

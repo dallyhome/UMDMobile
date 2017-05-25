@@ -23,12 +23,13 @@
     </ion-item-group>
 
     <ion-item-group  >
-      <ion-item-divider color="light">人員<button ion-button item-right><ion-icon name="add"></ion-icon> </button></ion-item-divider>
-      <ion-item *ngIf="group != null">Angola<button ion-button color="light" item-right><ion-icon name="remove"></ion-icon> </button></ion-item>
-      <ion-item *ngIf="group != null">Argentina<button ion-button color="light" item-right><ion-icon name="remove"></ion-icon> </button></ion-item>
-      <ion-item *ngIf="group != null">Armenia<button ion-button color="light" item-right><ion-icon name="remove"></ion-icon> </button></ion-item>
+      <ion-item-divider color="light">人員<button ion-button item-right (click)="SearchClick()"><ion-icon name="add"></ion-icon> </button></ion-item-divider>
+      <ion-item *ngIf="group != null">Angola<button ion-button color="light" item-right (click)="doDelete(0)"><ion-icon name="remove"></ion-icon> </button></ion-item>
+      <ion-item *ngIf="group != null">Argentina<button ion-button color="light" item-right (click)="doDelete(1)"><ion-icon name="remove"></ion-icon> </button></ion-item>
+      <!--<ion-item *ngIf="group != null">Armenia<button ion-button color="light" item-right><ion-icon name="remove"></ion-icon> </button></ion-item>
       <ion-item *ngIf="group != null">Australia<button ion-button color="light" item-right><ion-icon name="remove"></ion-icon> </button></ion-item>
-      <ion-item *ngIf="group != null">Austria<button ion-button color="light" item-right><ion-icon name="remove"></ion-icon> </button></ion-item>
+      <ion-item *ngIf="group != null">Austria<button ion-button color="light" item-right><ion-icon name="remove"></ion-icon> </button></ion-item>-->
+      <ion-item *ngFor="let employee of items; let i = index;">{{employee.name}}<button ion-button color="light" item-right (click)="doDelete(i)"><ion-icon name="remove"></ion-icon> </button></ion-item>
     </ion-item-group>
   </ion-list>
 </ion-content>

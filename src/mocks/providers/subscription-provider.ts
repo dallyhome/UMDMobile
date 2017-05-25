@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Api } from '../../providers/api';
 import { Subscribe } from '../../models/subscribe';
-import { MESSAGES } from '../MESSAGES'
+import { SUBSCRIPTIONS } from '../SUBSCRIPTIONS';
+import { ISubscriptionService } from '../../providers/isubscription-service'
 
 import 'rxjs/add/operator/map';
 
@@ -13,13 +14,13 @@ import 'rxjs/add/operator/map';
   for more info on providers and Angular 2 DI.
 */
 @Injectable()
-export class SubscriptionProvider {
+export class MockSubscriptionProvider implements ISubscriptionService{
   getSubscribed() : Subscribe[]
   {
-    return null;
+    return SUBSCRIPTIONS;
   }
-  subscribe(subscribes:Subscribe[]) 
-  {
-    return null;
-  }
+  // subscribe(subscribes:Subscribe[]) 
+  // {
+  //   return null;
+  // }
 }

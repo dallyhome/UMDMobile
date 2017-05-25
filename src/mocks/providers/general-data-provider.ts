@@ -3,6 +3,7 @@ import { Http } from '@angular/http'
 import { Api } from '../../providers/api'
 import { IGeneralDataService } from '../../providers/igeneral-data-service'
 import { DEPARTMENTS } from '../DEPARTMENTS'
+import { ALARMTYPES } from '../ALARMTYPES'
 
 import 'rxjs/add/operator/map'
 
@@ -20,5 +21,10 @@ export class MockGeneralDataProvider implements IGeneralDataService {
   getDepartments() : string[]
   {
     return DEPARTMENTS;
+  }
+
+  getAlarmTypes() : string[]
+  {
+    return ALARMTYPES;
   }
 }

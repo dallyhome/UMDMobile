@@ -11,6 +11,11 @@ import { MessagesDetailPage } from '../pages/messages-detail/messages-detail';
 import { GroupsPage } from '../pages/groups/groups';
 import { GroupEditPage } from '../pages/group-edit/group-edit';
 import { SubscribePage } from '../pages/subscribe/subscribe';
+import { SubscribeAddPage } from '../pages/subscribe-add/subscribe-add';
+import { SubscribeEditPage } from '../pages/subscribe-edit/subscribe-edit';
+import { SubscribeConfigPage } from '../pages/subscribe-config/subscribe-config';
+import { SubscribeConfigSearchPage } from '../pages/subscribe-config-search/subscribe-config-search';
+import { SubscribeMappgroupPage } from '../pages/subscribe-mappgroup/subscribe-mappgroup';
 import { TabsPage } from '../pages/tabs/tabs';
 import { PeopleSearchPage } from '../pages/people-search/people-search';
 import { GroupSearchPage } from '../pages/group-search/group-search';
@@ -21,6 +26,7 @@ import { GroupComponent } from '../component/group/group.component'
 import { EmployeeComponent } from '../component/employee/employee.component'
 import { GroupEditComponent } from '../component/group-edit/group-edit.component'
 import { MessageCategoryComponent } from '../component/message-category/message-category.component'
+import { SubscriptionComponent } from '../component/subscription/subscription.component'
 import { MessageProvider } from '../mocks/providers/message-provider'
 import { MockGroupProvider } from '../mocks/providers/group-provider'
 import { IGroupService } from '../providers/igroup-service'
@@ -28,6 +34,12 @@ import { IGeneralDataService } from '../providers/igeneral-data-service'
 import { MockEmployeeProvider } from '../mocks/providers/employee-provider'
 import { MockGeneralDataProvider } from '../mocks/providers/general-data-provider'
 import { IEmployeeService } from '../providers/iemployee-service'
+import { MockSubscriptionProvider } from '../mocks/providers/subscription-provider'
+import { ISubscriptionService } from '../providers/isubscription-service'
+import { MockAlarmSubjectProvider } from '../mocks/providers/alarm-subject-provider'
+import { IAlarmSubjectService } from '../providers/ialarm-subject-service'
+import { MockMappGroupProvider } from '../mocks/providers/mappgroup-provider'
+import { IMappGroupService } from '../providers/imappgroup-service'
 
 @NgModule({
   declarations: [
@@ -40,6 +52,11 @@ import { IEmployeeService } from '../providers/iemployee-service'
     MessagesPage,
     MessagesDetailPage,
     SubscribePage,
+    SubscribeAddPage,
+    SubscribeEditPage,
+    SubscribeConfigPage,
+    SubscribeConfigSearchPage,
+    SubscribeMappgroupPage,
     GroupsPage,
     GroupEditPage,
     MessageDetailComponent,
@@ -48,6 +65,7 @@ import { IEmployeeService } from '../providers/iemployee-service'
     EmployeeComponent,
     GroupComponent,
     GroupEditComponent,
+    SubscriptionComponent,
     PeopleSearchPage, 
     GroupSearchPage,
     DepartmentSelectPage,
@@ -67,6 +85,11 @@ import { IEmployeeService } from '../providers/iemployee-service'
     MessagesPage,
     MessagesDetailPage,
     SubscribePage,
+    SubscribeAddPage,
+    SubscribeEditPage,
+    SubscribeConfigPage,
+    SubscribeConfigSearchPage,
+    SubscribeMappgroupPage,
     GroupsPage,
     GroupEditPage,
     PeopleSearchPage, 
@@ -80,6 +103,9 @@ import { IEmployeeService } from '../providers/iemployee-service'
             , {provide: IGroupService, useClass: MockGroupProvider}
             , {provide: IEmployeeService, useClass: MockEmployeeProvider}
             , {provide: IGeneralDataService, useClass: MockGeneralDataProvider}
+            , {provide: ISubscriptionService, useClass: MockSubscriptionProvider}
+            , {provide: IAlarmSubjectService, useClass: MockAlarmSubjectProvider}
+            , {provide: IMappGroupService, useClass: MockMappGroupProvider}
             , MessageProvider]
 })
 export class AppModule {}

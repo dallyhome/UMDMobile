@@ -1,0 +1,11 @@
+    <ion-item-sliding>
+          <ion-item>
+             <ion-label>{{subscription.alarmID}}</ion-label>
+             <ion-checkbox color="danger"></ion-checkbox>
+          </ion-item>
+          <ion-item-options side="right">
+             <button ion-button (click)="editClick.emit(subscription)">
+                <ion-icon name="create"></ion-icon> Edit
+             </button>
+          </ion-item-options>
+    </ion-item-sliding>

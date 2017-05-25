@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { MenuController } from 'ionic-angular';
 import { MessageProvider } from '../../mocks/providers/message-provider';
 import { Message } from '../../models/message';
-import { CategorizedMessages } from '../../models/categorized-messages';
+// import { CategorizedMessages } from '../../models/categorized-messages';
 import { MessagesPage } from '../messages/messages';
 
 /*
@@ -30,7 +30,7 @@ export class CategorizedMessagesPage {
   activeMenu : string = "menu1";
   category : CategoryMethod = CategoryMethod.ByAlarmType;
   messages : Message[] = [];
-  categorizedMessage : CategorizedMessages[]
+  // categorizedMessage : CategorizedMessages[]
   constructor(public navCtrl: NavController, public navParams: NavParams, public menu: MenuController, public provider: MessageProvider) 
   {
     this.menu.enable(true, 'menu1');

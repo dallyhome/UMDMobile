@@ -7,6 +7,10 @@
 <ion-header>
 
   <ion-navbar>
+    <ion-buttons end>
+      <button ion-button  >完成
+      </button>
+    </ion-buttons>
     <ion-title>設定</ion-title>
   </ion-navbar>
 
@@ -14,10 +18,30 @@
 
 
 <ion-content padding>
-<button ion-button (click)="testClick()">test</button>
+  <ion-item>
+  <ion-label> 提示音</ion-label>
+  <ion-toggle checked="true"></ion-toggle>
+  </ion-item>
+  <ion-item>
+    <ion-label> 提示音效</ion-label>
+    <ion-select [(ngModel)]="notificationSound">
+      <ion-option value="default" selected="true">default</ion-option>
+      <ion-option value="sound2">sound2</ion-option>
+      <ion-option value="sound3">sound3</ion-option>
+      <ion-option value="sound4">sound4</ion-option>
+    </ion-select>
+   </ion-item>
+   <ion-item>
+    <ion-label> 顯示筆數</ion-label>
+    <ion-input type="text" [(ngModel)]="notificationCount"></ion-input>
+   </ion-item>
+
+<!--<button ion-button (click)="testClick()">test</button>
 <ion-list>
-    <!--employee *ngFor="let employee of items" [employee]="employee" [checked]="false"></employee-->
+    <employee *ngFor="let employee of items" [employee]="employee" [checked]="false"></employee>
+    <ion-item *ngFor="let employee of items">{{employee.name}}</ion-item>
     <ion-item *ngFor="let department of items">{{department}}</ion-item>
-</ion-list>
+    <ion-item *ngFor="let group of items">{{group.groupId}}</ion-item>
+</ion-list>-->
 
 </ion-content>

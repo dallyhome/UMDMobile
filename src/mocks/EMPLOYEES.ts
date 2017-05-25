@@ -15,4 +15,14 @@ export const EMPLOYEES: Employee[] = [
         comid: 'mary.li',
         name: '張碧如'
       },
+      {
+        empNo: '10020008',
+        comid: 'flower.li',
+        name: '李小花'
+      },
+      {
+        empNo: '10030008',
+        comid: 'cat.wang',
+        name: '王小貓'
+      }
 ];

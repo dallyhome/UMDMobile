@@ -1,6 +1,8 @@
 export class AlarmSubject
 {
-    actionID: string; 
+    alarmID: string; 
     owner: string;
     cimOwner: string;
+    alarmType: string;
+    description: String;
 }

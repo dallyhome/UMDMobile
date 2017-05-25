@@ -10,4 +10,5 @@ import 'rxjs/add/operator/map';
 */
 export abstract class IGeneralDataService  {
   abstract getDepartments() : string[];
+  abstract getAlarmTypes() : string[];
 }

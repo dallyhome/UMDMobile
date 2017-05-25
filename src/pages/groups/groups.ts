@@ -24,7 +24,7 @@ export class GroupsPage {
 
   doDelete(group: Group): void
   {
-      
+   this.groups.splice(this.groups.indexOf(group), 1);   
   }
 
 
