@@ -20,4 +20,5 @@ export class ExtraInfoX
             ExtraInfo.verifyWithAppID(resolve, reject, appID);
         });
     }
+
 }

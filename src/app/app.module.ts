@@ -1,6 +1,12 @@
 import { NgModule, ErrorHandler } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { XHRBackend, RequestOptions } from '@angular/http'
+import { BrowserModule } from '@angular/platform-browser';
+import { StatusBar } from '@ionic-native/status-bar'
+import { SplashScreen } from '@ionic-native/splash-screen'
 import { MyApp } from './app.component';
+import { InterceptedHttp } from './intercepted-http';
 import { GroupByPipe } from './groupby.pipe.ts'
 import { AboutPage } from '../pages/about/about';
 import { AuthTestPage } from '../pages/auth-test/auth-test';
@@ -29,11 +35,14 @@ import { MessageCategoryComponent } from '../component/message-category/message-
 import { SubscriptionComponent } from '../component/subscription/subscription.component'
 import { MessageProvider } from '../mocks/providers/message-provider'
 import { MockGroupProvider } from '../mocks/providers/group-provider'
+import { GroupProvider } from '../providers/group-provider'
+import { AppConfig } from '../providers/app-config'
 import { IGroupService } from '../providers/igroup-service'
 import { IGeneralDataService } from '../providers/igeneral-data-service'
 import { MockEmployeeProvider } from '../mocks/providers/employee-provider'
 import { MockGeneralDataProvider } from '../mocks/providers/general-data-provider'
 import { IEmployeeService } from '../providers/iemployee-service'
+import { ExtraInfoService } from './extrainfo-service';
 import { MockSubscriptionProvider } from '../mocks/providers/subscription-provider'
 import { ISubscriptionService } from '../providers/isubscription-service'
 import { MockAlarmSubjectProvider } from '../mocks/providers/alarm-subject-provider'
@@ -73,7 +82,9 @@ import { IMappGroupService } from '../providers/imappgroup-service'
     TabsPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpModule,
+    BrowserModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -100,12 +111,24 @@ import { IMappGroupService } from '../providers/imappgroup-service'
   ],
 
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, 
-            , {provide: IGroupService, useClass: MockGroupProvider}
+            , {provide: IGroupService, useClass: GroupProvider}
             , {provide: IEmployeeService, useClass: MockEmployeeProvider}
             , {provide: IGeneralDataService, useClass: MockGeneralDataProvider}
+            , MessageProvider
+            , AppConfig
+            , ExtraInfoService
             , {provide: ISubscriptionService, useClass: MockSubscriptionProvider}
             , {provide: IAlarmSubjectService, useClass: MockAlarmSubjectProvider}
             , {provide: IMappGroupService, useClass: MockMappGroupProvider}
-            , MessageProvider]
+            , StatusBar
+            , SplashScreen
+            , {
+                provide: InterceptedHttp,
+                useFactory: (backend: XHRBackend, options: RequestOptions, extraInfoService: ExtraInfoService) => {
+                  return new InterceptedHttp(backend, options, extraInfoService);
+                },
+                deps: [XHRBackend, RequestOptions, ExtraInfoService]
+              }
+            ]
 })
 export class AppModule {}

@@ -5,7 +5,7 @@ import { MessageProvider } from '../../mocks/providers/message-provider';
 import { Message } from '../../models/message';
 // import { CategorizedMessages } from '../../models/categorized-messages';
 import { MessagesPage } from '../messages/messages';
-
+import { AuthTestPage } from '../auth-test/auth-test';
 /*
   Generated class for the CategorizedMessage page.
 
@@ -51,5 +51,9 @@ export class CategorizedMessagesPage {
       case CategoryMethod.ByAlarmType:
           return 'alarmType';
     }
+  }
+  authTest()
+  {
+    this.navCtrl.push(AuthTestPage)    
   }
 }

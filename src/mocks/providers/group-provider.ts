@@ -4,6 +4,7 @@ import { Api } from '../../providers/api';
 import { Group } from '../../models/group';
 import { GROUPS } from '../GROUPS'
 import { IGroupService } from '../../providers/igroup-service'
+import { Observable } from 'rxjs/Rx'
 
 import 'rxjs/add/operator/map';
 
@@ -18,14 +19,14 @@ export class MockGroupProvider implements IGroupService {
   constructor(public http: Http) {
   }
   
-  getGroups(owner: string, pattern?: string) : Group[]
+  getGroups(owner: string, pattern?: string) : Observable<Group[]>
   {
     let output: Group[] = [];
     let tempGroups: Group[] = [];
     let remainsGroups: Group[];
     if (!pattern || 0 === pattern.trim().length)
     {
-      return GROUPS;
+      return Observable.create(GROUPS);
     }
     let searchPattern = new RegExp('.*' + pattern + '.*', "i");
     GROUPS.forEach(element => {
@@ -46,7 +47,7 @@ export class MockGroupProvider implements IGroupService {
       }
     });
 
-    return output;
+    return Observable.create(output);
   }
   updateGroup(user: string, group: Group) 
   {

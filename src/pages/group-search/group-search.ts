@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Group } from '../../models/group'
 import { IGroupService } from '../../providers/igroup-service'
+import { Observable } from 'rxjs/Rx'
 /*
   Generated class for the PeopleSearch page.
 
@@ -41,15 +42,16 @@ export class GroupSearchPage {
 
   getGroups(owner: string, pattern?: string) : Group[]
   {
-    let tempArray = this.provider.getGroups(owner, pattern);
-    let output : Group[] = [];
-    tempArray.forEach(group => {
-      if (!this.filterGroupIDs.has(group.groupId))
-      {
-        output.push(group);
-      }      
-    });
-    return output;
+      let tempArray = [];
+      this.provider.getGroups(owner, pattern).flatMap(m => tempArray = m).catch((err) => {return [];})
+      let output : Group[] = [];
+      tempArray.forEach(group => {
+        if (!this.filterGroupIDs.has(group.groupId))
+        {
+          output.push(group);
+        }      
+      });
+      return output;
   }
 
   ionViewDidLoad() {

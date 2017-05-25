@@ -1,0 +1,9 @@
+http://tnvtwebapi/NewWebApi/Agency/api/service/
+
+
+"cef5c458-6f25-4251-c663-10f4757fb1ce"=>"http://c4c010685.cminl.oa/UMD/Services/FileTransferHandler.ashx"
+"168704ec-b560-587c-4005-bc18b56260b8"=>"http://c4c010685.cminl.oa/UMD/Services/FileDownloadHandler.ashx"
+"d8ae927c-2fd3-42d0-c95c-975b432156ec"=>"http://c4c010685.cminl.oa/UMD/Services/UMDDataService.svc/GetRegisteredAlarmId"
+"228a0c4e-3a39-06cb-6eb7-60ca489d52be"=>"http://c4c010685.cminl.oa/UMD/Services/UMDDataService.svc/SetAlarmAction"
+"e1c5da29-9bf6-cf83-72fb-76d287c98bdb"=>"http://c4c010685.cminl.oa/UMD/Services/UMDDataService.svc/GetGroupData"
+"fb1a46be-e4ae-3b49-b941-26da53f9ba36"=>"http://c4c010685.cminl.oa/UMD/Services/UMDDataService.svc/GetAlarmTypes"

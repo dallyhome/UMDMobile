@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Group } from '../models/group';
+import { Observable } from 'rxjs/Rx'
 
 import 'rxjs/add/operator/map';
 
@@ -10,7 +11,7 @@ import 'rxjs/add/operator/map';
   for more info on providers and Angular 2 DI.
 */
 export abstract class IGroupService  {
-  abstract getGroups(owner: string, pattern?: string) : Group[];
+  abstract getGroups(owner: string, pattern?: string) : Observable<Group[]>;
   abstract updateGroup(user: string, group: Group);
   abstract deleteGroup(user: string, groupId: string);
 }
