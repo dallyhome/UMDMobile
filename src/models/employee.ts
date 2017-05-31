@@ -4,7 +4,7 @@ export class Employee
     {
 
     }
-    comid: string;
-    empNo: string;
+    adId: string;
+    empId: string;
     name: string;
 }

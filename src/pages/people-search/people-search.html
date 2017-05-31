@@ -18,9 +18,12 @@
   <ion-searchbar
     [(ngModel)]="pattern"
     [showCancelButton]="shouldShowCancel"
-    (ionInput)="onInput($event)"
-    (ionCancel)="onCancel($event)">
+    [formControl]="searchControl"
+    (ionInput)="onSearchInput()">
   </ion-searchbar>
+    <div *ngIf="searching" class="spinner-container">
+        <ion-spinner></ion-spinner>
+    </div>  
   <ion-list>
     <employee *ngFor="let employee of employees" [employee]="employee" [checked]="selectedEmployee == employee" (click)="selectEmployee(employee)"></employee>
   </ion-list>

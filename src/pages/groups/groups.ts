@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { MyApp } from '../../app/app.component';
-import { IGroupService } from '../../providers/igroup-service'
+import { GroupProvider } from '../../providers/group-provider'
 import { Group } from '../../models/group'
 import { GroupEditPage } from '../group-edit/group-edit'
 import { Observable } from 'rxjs/Rx'
+import { AccountProvider } from '../../providers/account-provider'
 
 
 @Component({
@@ -14,9 +15,10 @@ import { Observable } from 'rxjs/Rx'
 export class GroupsPage {
   groups : Group[];
 
-  constructor(public navCtrl: NavController, public provider: IGroupService) {
+  constructor(public navCtrl: NavController, public provider: GroupProvider
+                                    , public accountProvider: AccountProvider) {
       var me: GroupsPage = this;
-      provider.getGroups("10004698").subscribe(
+      provider.getGroups(this.accountProvider.getInxAccount().empNo).subscribe(
           value => me.groups = value,
           error => me.groups = [],
           () => console.log("done")

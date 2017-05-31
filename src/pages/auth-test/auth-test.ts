@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
-import { ExtraInfoService } from '../../app/extrainfo-service';
+import { ExtraInfoProvider } from '../../providers/extrainfo-provider';
 import { AppConfig } from '../../providers/app-config';
 declare var ExtraInfo: any;
 
@@ -10,7 +10,7 @@ declare var ExtraInfo: any;
   templateUrl: 'auth-test.html'
 })
 export class AuthTestPage {
-  constructor(public extraInfo:ExtraInfoService, public navCtrl: NavController, public appConfig: AppConfig) {
+  constructor(public extraInfo:ExtraInfoProvider, public navCtrl: NavController, public appConfig: AppConfig) {
   }
   apiResult: string;
   apiError: string;

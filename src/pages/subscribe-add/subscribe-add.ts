@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { SubscribeConfigPage } from '../subscribe-config/subscribe-config';
-import { IAlarmSubjectService } from '../../providers/ialarm-subject-service'
+import { AlarmSubjectProvider } from '../../providers/alarm-subject-provider'
 import { AlarmSubject } from '../../models/alarm-subject';
 
 /*
@@ -17,9 +17,10 @@ import { AlarmSubject } from '../../models/alarm-subject';
 export class SubscribeAddPage {
 category = String;
 alarmsubjects: AlarmSubject[] = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public provider: IAlarmSubjectService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public provider: AlarmSubjectProvider) {
+    var me = this;
     this.category = this.navParams.get('category');
-    this.alarmsubjects = this.provider.getAlarmSubjects();   
+    this.provider.getAlarmSubjects().subscribe(m => me.alarmsubjects = m);   
   }
 
   ionViewDidLoad() {

@@ -1,7 +1,5 @@
-import { Injectable } from '@angular/core';
 import { Subscribe } from '../models/subscribe';
-
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Rx'
 
 /*
   Generated class for the Message provider.
@@ -9,7 +7,6 @@ import 'rxjs/add/operator/map';
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular 2 DI.
 */
-export abstract class ISubscriptionService  {
-  abstract getSubscribed() : Subscribe[];
-//   abstract getSubsubscrib() : Subscribe[];
+export abstract class SubscriptionProvider  {
+  abstract getSubscribed() : Observable<Subscribe[]>;
 }

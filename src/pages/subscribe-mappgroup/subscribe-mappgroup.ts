@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { MappGroup } from '../../models/mappgroup';
-import { IMappGroupService } from '../../providers/imappgroup-service'
+import { MappGroupProvider } from '../../providers/mappgroup-provider'
 
 /*
   Generated class for the SubscribeMappgroup page.
@@ -14,7 +14,7 @@ import { IMappGroupService } from '../../providers/imappgroup-service'
   templateUrl: 'subscribe-mappgroup.html'
 })
 export class SubscribeMappgroupPage {
-  constructor(public navCtrl: NavController, public navParams: NavParams, public provider: IMappGroupService) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public provider: MappGroupProvider) {}
   id: string;
   description: string;
   mappgroups : MappGroup[] = [];

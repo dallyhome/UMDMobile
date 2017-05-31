@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { SubscribeAddPage } from '../subscribe-add/subscribe-add';
-import { ISubscriptionService } from '../../providers/isubscription-service'
+import { SubscriptionProvider } from '../../providers/subscription-provider'
 import { Subscribe } from '../../models/subscribe';
 import { SubscribeConfigPage } from '../subscribe-config/subscribe-config';
 /*
@@ -18,9 +18,11 @@ export class SubscribeEditPage {
 category: string;
 // filterargs: {alarmType: 'RTQCS'};  
 subscriptions: Subscribe[] = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public provider: ISubscriptionService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public provider: SubscriptionProvider) {
        this.category = this.navParams.get('category');
-       this.subscriptions = this.provider.getSubscribed();   
+       this.provider.getSubscribed().subscribe(
+         res => this.subscriptions = res
+       );   
   }
    
   ionViewDidLoad() {

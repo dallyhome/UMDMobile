@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { Api } from '../../providers/api';
 import { Group } from '../../models/group';
 import { GROUPS } from '../GROUPS'
-import { IGroupService } from '../../providers/igroup-service'
+import { GroupProvider } from '../../providers/group-provider'
 import { Observable } from 'rxjs/Rx'
 
 import 'rxjs/add/operator/map';
@@ -15,7 +15,7 @@ import 'rxjs/add/operator/map';
   for more info on providers and Angular 2 DI.
 */
 @Injectable()
-export class MockGroupProvider implements IGroupService {
+export class MockGroupProvider implements GroupProvider {
   constructor(public http: Http) {
   }
   
@@ -26,7 +26,7 @@ export class MockGroupProvider implements IGroupService {
     let remainsGroups: Group[];
     if (!pattern || 0 === pattern.trim().length)
     {
-      return Observable.create(GROUPS);
+      return Observable.from([GROUPS]);
     }
     let searchPattern = new RegExp('.*' + pattern + '.*', "i");
     GROUPS.forEach(element => {
@@ -47,7 +47,7 @@ export class MockGroupProvider implements IGroupService {
       }
     });
 
-    return Observable.create(output);
+    return Observable.from([output]);
   }
   updateGroup(user: string, group: Group) 
   {

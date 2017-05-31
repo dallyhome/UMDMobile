@@ -1,7 +1,8 @@
 import { Observable } from 'rxjs/Observable'
 import { AppConfig } from '../providers/app-config'
 import { Injectable } from '@angular/core';
-
+import { InxAccount } from '../models/inx-account'
+import { AccountProvider } from './account-provider'
 declare var ExtraInfo: any;
 
 /*
@@ -11,11 +12,16 @@ declare var ExtraInfo: any;
  * Requires {@link module:driftyco/ionic-native} and the Cordova plugin: 'ExtraInfo'
  */
 @Injectable()
-export class ExtraInfoService
+export class ExtraInfoProvider implements AccountProvider
 {
+    static account: InxAccount = null;
     constructor(public appConfig: AppConfig)
     {
 
+    }
+    getInxAccount() : InxAccount
+    {
+        return ExtraInfoProvider.account;
     }
     authInfoDataObserver : any;
     authResultObserver: any;
@@ -23,13 +29,14 @@ export class ExtraInfoService
     authResult : Observable<any>;
     accessToken: string;
     getUserInfo(): Observable<any> {
-        var me: ExtraInfoService = this;
+        var me: ExtraInfoProvider = this;
         return Observable.create(observer => {
             ExtraInfo.getUserInfo(
                 (result) => {
                     me.accessToken = result["accessToken"];
                     observer.next(result);
                     observer.complete();
+                    ExtraInfoProvider.account = result;
                 }, 
                 (err) => {
                     me.accessToken = "";
@@ -40,7 +47,7 @@ export class ExtraInfoService
     }
   
     verifyWithAppID(): Observable<any> {
-        var me: ExtraInfoService = this;
+        var me: ExtraInfoProvider = this;
         return Observable.create(observer => {
             ExtraInfo.verifyWithAppID(
                 (result) => {

@@ -1,16 +1,12 @@
 import {Injectable} from '@angular/core'
 import {Http, XHRBackend, RequestOptions, Request, RequestOptionsArgs, Response, Headers} from '@angular/http'
 import { Observable } from 'rxjs/Observable'
-import { ExtraInfoService } from './extrainfo-service'
-import 'rxjs/add/operator/mergeMap'
-import 'rxjs/add/operator/map'
-import 'rxjs/add/operator/catch'
-import 'rxjs/add/observable/throw'
+import { ExtraInfoProvider } from '../providers/extrainfo-provider'
 
 @Injectable()
 export class InterceptedHttp extends Http {
   public token: string;
-  constructor(backend: XHRBackend, options: RequestOptions, public tokenService:ExtraInfoService) {
+  constructor(backend: XHRBackend, options: RequestOptions, public tokenService:ExtraInfoProvider) {
     super(backend, options); 
   }
   refreshToken() : Observable<string> 

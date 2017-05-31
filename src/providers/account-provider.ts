@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Employee } from '../models/employee';
+import { InxAccount } from '../models/inx-account';
 
-import 'rxjs/add/operator/map';
 
 /*
   Generated class for the Message provider.
@@ -9,6 +8,6 @@ import 'rxjs/add/operator/map';
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular 2 DI.
 */
-export abstract class IEmployeeService  {
-  abstract getEmployees(pattern: string) : Employee[];
+export abstract class AccountProvider  {
+  abstract getInxAccount() : InxAccount;
 }

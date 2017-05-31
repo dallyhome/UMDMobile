@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { IGeneralDataService } from '../../providers/igeneral-data-service'
+import { GeneralDataProvider } from '../../providers/general-data-provider'
 
 /*
   Generated class for the DepartmentSelect page.
@@ -17,7 +17,7 @@ export class DepartmentSelectPage {
   pageTitle = "選擇部門";
   filterDepartmentIDs : Set<string> = new Set<string>();
   selectedDepartment: string;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public provider: IGeneralDataService) 
+  constructor(public navCtrl: NavController, public navParams: NavParams, public provider: GeneralDataProvider) 
   {
     let filterDepartments: string[] = navParams.get("filterDepartments");
     if (filterDepartments)
@@ -35,7 +35,7 @@ export class DepartmentSelectPage {
 
   getDepartments(owner: string, pattern?: string) : string[]
   {
-    let tempArray = this.provider.getDepartments();
+    let tempArray = this.provider.getDepartments().toArray()[0];
     let output : string[] = [];
     tempArray.forEach(department => {
       if (!this.filterDepartmentIDs.has(department))

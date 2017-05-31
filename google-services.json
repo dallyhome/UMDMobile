@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "326170712857",
+    "firebase_url": "https://umdmobile-4f0ea.firebaseio.com",
+    "project_id": "umdmobile-4f0ea",
+    "storage_bucket": "umdmobile-4f0ea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326170712857:android:856fa4132b78adf3",
+        "android_client_info": {
+          "package_name": "com.inx.app.umdmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "326170712857-3pohckjrinbupijpb5b8d87sg1d81ves.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxIhnyk0qK1lTbElcO80YWDV5tK9gXKa0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

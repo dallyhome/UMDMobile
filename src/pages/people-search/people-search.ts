@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component } from '@angular/core'
+import { NavController, NavParams } from 'ionic-angular'
+import { FormControl } from '@angular/forms'
 import { Employee } from '../../models/employee'
-import { IEmployeeService } from '../../providers/iemployee-service'
+import { EmployeeProvider } from '../../providers/employee-provider'
+import { Observable } from 'rxjs/Rx'
+import { AccountProvider } from '../../providers/account-provider'
+
 /*
   Generated class for the PeopleSearch page.
 
@@ -19,17 +23,22 @@ export class PeopleSearchPage {
   callback : (Employee);
   selectedEmployee : Employee = null;
   pattern : string;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public provider: IEmployeeService) 
+  searchControl: FormControl;
+  searching: boolean = false;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public provider: EmployeeProvider
+                                                                  , public accountProvider: AccountProvider) 
   {
+    this.searchControl = new FormControl();
+    
     let filterEmployees: Employee[] = navParams.get("filterEmployees");
     if (filterEmployees)
     {
       filterEmployees.forEach(employee => {
-        this.filterEmployeeIDs.add(employee.empNo);    
+        this.filterEmployeeIDs.add(employee.empId);    
       });
     }
 
-    this.employees = this.getEmployees("");    
+    this.employees = [];    
     this.pattern = "";
 
     let title: string = navParams.get("pageTitle");
@@ -39,37 +48,60 @@ export class PeopleSearchPage {
     }
   }
 
-  getEmployees(owner: string, pattern?: string) : Employee[]
-  {
-    let tempArray = this.provider.getEmployees(pattern);
-    let output : Employee[] = [];
-    tempArray.forEach(employee => {
-      if (!this.filterEmployeeIDs.has(employee.empNo))
-      {
-        output.push(employee);
-      }      
-    });
-    return output;
-  }
+  // getEmployees(owner: string, pattern?: string) : Observable<Employee>
+  // {
+  //   var me = this;
+  //   return Observable.from(this.provider.getEmployees('10004698', pattern).toArray()[0])
+  //   .filter( (obs, idx) =>
+  //            {
+  //              return me.filterEmployeeIDs.has(obs[idx].empNo);
+  //            }
+  //          );
+  // }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PeopleSearchPage');
+//     this.setFilteredItems();
+ 
+        this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+            this.searching = false;
+            if (search.length > 0)
+            {
+              this.getEmployees();
+            }
+            else
+            {
+              this.employees = [];
+            }
+ 
+        });    
   }
 
-  onInput($event)
+  getEmployees()
   {
-    this.employees = this.provider.getEmployees(this.pattern);    
+    var me = this;
+    this.provider.getEmployees(this.accountProvider.getInxAccount().empNo, this.pattern).subscribe(res => me.employees = res);    
+
   }
 
-  onCancel()
+  onSearchInput()
   {
-
+    this.searching = true;
   }
+  // onInput($event)
+  // {
+  //   this.getEmployees();
+  // }
 
-  onClear()
-  {
+  // onCancel()
+  // {
 
-  }
+  // }
+
+  // onClear()
+  // {
+
+  // }
 
   selectEmployee(employee: Employee)
   {

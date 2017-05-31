@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component } from '@angular/core'
+import { NavController, NavParams } from 'ionic-angular'
 import { Group } from '../../models/group'
-import { IGroupService } from '../../providers/igroup-service'
+import { GroupProvider } from '../../providers/group-provider'
 import { Observable } from 'rxjs/Rx'
 /*
   Generated class for the PeopleSearch page.
@@ -20,7 +20,7 @@ export class GroupSearchPage {
   pageTitle = "選擇群組";
   callback : (Group);
   selectedGroup : Group = null;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public provider: IGroupService) 
+  constructor(public navCtrl: NavController, public navParams: NavParams, public provider: GroupProvider) 
   {
 
     let filterGroups: Group[] = navParams.get("filterGroups");
@@ -30,8 +30,8 @@ export class GroupSearchPage {
         this.filterGroupIDs.add(group.groupId);    
       });
     }
-
-    this.groups = this.getGroups("");    
+    var me = this;
+    this.getGroups("").subscribe(m => me.groups = m);    
     this.pattern = "";
     let title: string = navParams.get("pageTitle");
     if (null != title && title.trim().length > 0)
@@ -40,18 +40,20 @@ export class GroupSearchPage {
     }
   }
 
-  getGroups(owner: string, pattern?: string) : Group[]
+  getGroups(owner: string, pattern?: string) : Observable<Group[]>
   {
-      let tempArray = [];
-      this.provider.getGroups(owner, pattern).flatMap(m => tempArray = m).catch((err) => {return [];})
-      let output : Group[] = [];
-      tempArray.forEach(group => {
-        if (!this.filterGroupIDs.has(group.groupId))
-        {
-          output.push(group);
-        }      
+      var me = this;
+      let groups = this.provider.getGroups(owner, pattern);
+      return groups.map((x, idx) => {
+        let output : Group[] = [];
+        x.forEach(group => {
+          if (!me.filterGroupIDs.has(group.groupId))
+          {
+            output.push(group);
+          }      
+        });
+        return output;
       });
-      return output;
   }
 
   ionViewDidLoad() {
@@ -65,7 +67,8 @@ export class GroupSearchPage {
 
   onInput($event)
   {
-    this.groups = this.getGroups("", this.pattern);    
+    var me = this;
+    this.getGroups("", this.pattern).subscribe( m => me.groups = m);    
   }
 
   onCancel()

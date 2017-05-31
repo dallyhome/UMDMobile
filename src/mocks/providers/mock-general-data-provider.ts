@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core'
 import { Http } from '@angular/http'
 import { Api } from '../../providers/api'
-import { IGeneralDataService } from '../../providers/igeneral-data-service'
+import { GeneralDataProvider } from '../../providers/general-data-provider'
 import { DEPARTMENTS } from '../DEPARTMENTS'
 import { ALARMTYPES } from '../ALARMTYPES'
+import { Observable } from 'rxjs/Rx'
+
 
 import 'rxjs/add/operator/map'
 
@@ -14,17 +16,17 @@ import 'rxjs/add/operator/map'
   for more info on providers and Angular 2 DI.
 */
 @Injectable()
-export class MockGeneralDataProvider implements IGeneralDataService {
+export class MockGeneralDataProvider implements GeneralDataProvider {
   constructor(public http: Http) {
   }
   
-  getDepartments() : string[]
+  getDepartments() : Observable<string[]>
   {
-    return DEPARTMENTS;
+    return Observable.from([DEPARTMENTS]);
   }
 
-  getAlarmTypes() : string[]
+  getAlarmTypes() : Observable<string[]>
   {
-    return ALARMTYPES;
+    return Observable.from([ALARMTYPES]);
   }
 }

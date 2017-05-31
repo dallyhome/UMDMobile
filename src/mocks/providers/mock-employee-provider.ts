@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { IEmployeeService } from '../../providers/iemployee-service'
+import { EmployeeProvider } from '../../providers/employee-provider'
 import { Employee } from '../../models/employee'
 import { EMPLOYEES } from '../EMPLOYEES'
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Rx'
 
 /*
   Generated class for the EmployeeProvider provider.
@@ -12,13 +12,13 @@ import 'rxjs/add/operator/map';
   for more info on providers and Angular 2 DI.
 */
 @Injectable()
-export class MockEmployeeProvider implements IEmployeeService {
+export class MockEmployeeProvider implements EmployeeProvider {
 
   constructor(public http: Http) {
     console.log('Hello EmployeeProvider Provider');
   }
   
-  getEmployees(pattern: string) : Employee[]
+  getEmployees(empID: string, pattern: string) : Observable<Employee[]>
   {
     let comidPattern = new RegExp('^[a-z].*', "i");
     let empnoPattern = new RegExp('^[0-9].*');
@@ -26,12 +26,12 @@ export class MockEmployeeProvider implements IEmployeeService {
     let searchPattern = new RegExp('.*' + pattern + '.*', "i");
     if (!pattern || 0 === pattern.trim().length)
     {
-      return EMPLOYEES;
+      return Observable.from([EMPLOYEES]);
     }
     if (comidPattern.test(pattern))
     {
         EMPLOYEES.forEach(element => {
-          if (searchPattern.test(element.comid))
+          if (searchPattern.test(element.adId))
           {
             output.push(element);
           }
@@ -40,7 +40,7 @@ export class MockEmployeeProvider implements IEmployeeService {
     else if (empnoPattern.test(pattern))
     {
         EMPLOYEES.forEach(element => {
-          if (searchPattern.test(element.empNo))
+          if (searchPattern.test(element.empId))
           {
             output.push(element);
           }
@@ -56,6 +56,6 @@ export class MockEmployeeProvider implements IEmployeeService {
         });
     }
     
-    return output;
+    return Observable.from([output]);
   }
 }

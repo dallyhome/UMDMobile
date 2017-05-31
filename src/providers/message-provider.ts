@@ -1,24 +1,20 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Api } from './api';
-import { Message } from '../models/message';
-import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the Message provider.
+import { Message } from '../models/message'
+import { Observable } from 'rxjs/Rx'
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
-@Injectable()
-export class MessageProvider {
+export abstract class MessageProvider {
+  abstract getMessage() : Observable<Message[]>
 
-  constructor(public http: Http, public api: Api) {
-    console.log('Hello Message Provider');
-  }
-  
-  getMessage(beforeDate:Date) : Message[]
-  {
-    return null
-  }
+  abstract getMessageFromUmd(beforeDT:Date) : Observable<Message[]> //UMD Service provide
+
+  abstract saveMessage(message: Message)
+
+  abstract set(key: string, value: string): Promise<any>
+
+  abstract get(key: string): Promise<any> 
+
+  abstract remove(key: string): Promise<any>
+
+  abstract getall(): Promise<any>
 }
+

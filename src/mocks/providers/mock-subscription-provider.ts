@@ -3,9 +3,9 @@ import { Http } from '@angular/http';
 import { Api } from '../../providers/api';
 import { Subscribe } from '../../models/subscribe';
 import { SUBSCRIPTIONS } from '../SUBSCRIPTIONS';
-import { ISubscriptionService } from '../../providers/isubscription-service'
+import { SubscriptionProvider } from '../../providers/subscription-provider'
 
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Rx';
 
 /*
   Generated class for the Message provider.
@@ -14,13 +14,9 @@ import 'rxjs/add/operator/map';
   for more info on providers and Angular 2 DI.
 */
 @Injectable()
-export class MockSubscriptionProvider implements ISubscriptionService{
-  getSubscribed() : Subscribe[]
+export class MockSubscriptionProvider implements SubscriptionProvider{
+  getSubscribed() : Observable<Subscribe[]>
   {
-    return SUBSCRIPTIONS;
+    return Observable.from([SUBSCRIPTIONS]);
   }
-  // subscribe(subscribes:Subscribe[]) 
-  // {
-  //   return null;
-  // }
 }

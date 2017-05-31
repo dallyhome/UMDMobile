@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { SubscribeEditPage } from '../subscribe-edit/subscribe-edit';
-import { SubscribeAddPage } from '../subscribe-add/subscribe-add';
-import { IGeneralDataService } from '../../providers/igeneral-data-service'
+import { Component } from '@angular/core'
+import { NavController } from 'ionic-angular'
+import { SubscribeEditPage } from '../subscribe-edit/subscribe-edit'
+import { SubscribeAddPage } from '../subscribe-add/subscribe-add'
+import { GeneralDataProvider } from '../../providers/general-data-provider'
 
 @Component({
   selector: 'page-subscribe',
@@ -10,8 +10,11 @@ import { IGeneralDataService } from '../../providers/igeneral-data-service'
 })
 export class SubscribePage {
   alarmtypes : string[] = [];
-  constructor(public navCtrl: NavController, public provider: IGeneralDataService) {
-      this.alarmtypes = this.provider.getAlarmTypes();   
+  constructor(public navCtrl: NavController, public provider: GeneralDataProvider) {
+      var me = this;
+      this.provider.getAlarmTypes().subscribe(
+        m => me.alarmtypes = m
+      );   
   }
 
   gotoEdit(category:string): void
