@@ -7,6 +7,6 @@ import { Observable } from 'rxjs/Rx'
   for more info on providers and Angular 2 DI.
 */
 export abstract class GeneralDataProvider  {
-  abstract getDepartments() : Observable<string[]>;
+  // abstract getDepartments() : Observable<string[]>;
   abstract getAlarmTypes() : Observable<string[]>;
 }

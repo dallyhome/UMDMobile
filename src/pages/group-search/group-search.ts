@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular'
 import { Group } from '../../models/group'
 import { GroupProvider } from '../../providers/group-provider'
 import { Observable } from 'rxjs/Rx'
+import { AccountProvider } from '../../providers/account-provider'
 /*
   Generated class for the PeopleSearch page.
 
@@ -16,11 +17,12 @@ import { Observable } from 'rxjs/Rx'
 export class GroupSearchPage {
   groups : Group[] = [];
   filterGroupIDs : Set<string> = new Set<string>();
-  pattern : string;
+  pattern : string ;
   pageTitle = "選擇群組";
   callback : (Group);
   selectedGroup : Group = null;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public provider: GroupProvider) 
+  constructor(public navCtrl: NavController, public navParams: NavParams, public provider: GroupProvider
+                                                                        , public accountProvider: AccountProvider)  
   {
 
     let filterGroups: Group[] = navParams.get("filterGroups");
@@ -31,8 +33,8 @@ export class GroupSearchPage {
       });
     }
     var me = this;
-    this.getGroups("").subscribe(m => me.groups = m);    
-    this.pattern = "";
+    this.pattern ="";
+    this.getGroups(this.accountProvider.getInxAccount().empNo, this.pattern).subscribe(m => me.groups = m);
     let title: string = navParams.get("pageTitle");
     if (null != title && title.trim().length > 0)
     {
@@ -68,7 +70,7 @@ export class GroupSearchPage {
   onInput($event)
   {
     var me = this;
-    this.getGroups("", this.pattern).subscribe( m => me.groups = m);    
+    this.getGroups(this.accountProvider.getInxAccount().empNo, this.pattern).subscribe( m => me.groups = m);    
   }
 
   onCancel()

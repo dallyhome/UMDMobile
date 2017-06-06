@@ -21,6 +21,9 @@
     (ionCancel)="onCancel($event)">
   </ion-searchbar>
   <ion-list>
-    <group *ngFor="let group of groups" [group]="group" [navCtrl]="navCtrl" [checked]="selectedGroup == group" (click)="selectGroup(group)"></group>
+    <group *ngFor="let group of groups" [group]="group" [checked]="selectedGroup == group" (click)="selectGroup(group)"></group>
   </ion-list>
+    <!--<ion-list>
+    <group *ngFor="let group of groups" [group]="group" [navCtrl]="navCtrl" [checked]="selectedGroup == group" (click)="selectGroup(group)"></group>
+  </ion-list>-->
 </ion-content>

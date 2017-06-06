@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { GeneralDataProvider } from '../../providers/general-data-provider'
+import { Department } from '../../models/department'
+import { DepartmentProvider } from '../../providers/department-provider'
+import { Observable } from 'rxjs/Rx'
+// import { GeneralDataProvider } from '../../providers/general-data-provider'
 
 /*
   Generated class for the DepartmentSelect page.
@@ -13,19 +16,27 @@ import { GeneralDataProvider } from '../../providers/general-data-provider'
   templateUrl: 'department-select.html'
 })
 export class DepartmentSelectPage {
-  departments : string[] = [];
-  pageTitle = "選擇部門";
+  // departments : string[] = [];
+  departments : Department[] = [];
   filterDepartmentIDs : Set<string> = new Set<string>();
-  selectedDepartment: string;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public provider: GeneralDataProvider) 
+  pageTitle = "選擇部門";
+  callback : (Department);
+  selectedDepartment: Department= null;
+  pattern : string;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public provider: DepartmentProvider) 
   {
-    let filterDepartments: string[] = navParams.get("filterDepartments");
+
+    let filterDepartments: Department[] = navParams.get("filterDepartments");
     if (filterDepartments)
     {
-      this.filterDepartmentIDs = new Set<string>(filterDepartments);
+      filterDepartments.forEach(department => {
+        this.filterDepartmentIDs.add(department.deptId);    
+      });
     }
-
-    this.departments = this.getDepartments("");    
+    
+    var me = this;
+    this.pattern = "";
+    this.getDepartments(this.pattern).subscribe(m => me.departments = m);
     let title: string = navParams.get("pageTitle");
     if (null != title && title.trim().length > 0)
     {
@@ -33,26 +44,50 @@ export class DepartmentSelectPage {
     }
   }
 
-  getDepartments(owner: string, pattern?: string) : string[]
+
+  getDepartments(pattern?: string) :  Observable<Department[]>
   {
-    let tempArray = this.provider.getDepartments().toArray()[0];
-    let output : string[] = [];
-    tempArray.forEach(department => {
-      if (!this.filterDepartmentIDs.has(department))
-      {
-        output.push(department);
-      }      
-    });
-    return output;
+      var me = this;
+      let departments = this.provider.getDepartments(pattern);
+      return departments.map((x, idx) => {
+        let output : Department[] = [];
+        x.forEach(department => {
+          if (!me.filterDepartmentIDs.has(department.deptId))
+          {
+            output.push(department);
+          }      
+        });
+        return output;
+      });
   }
 
-  selectDepartment(department: string)
+  // getDepartments(owner: string, pattern?: string) : string[]
+  // {
+  //   let tempArray = this.provider.getDepartments().toArray()[0];
+  //   let output : string[] = [];
+  //   tempArray.forEach(department => {
+  //     if (!this.filterDepartmentIDs.has(department))
+  //     {
+  //       output.push(department);
+  //     }      
+  //   });
+  //   return output;
+  // }
+
+  onInput($event)
+  {
+    var me = this;
+    this.getDepartments(this.pattern).subscribe( m => me.departments = m);    
+  }
+
+
+  selectDepartment(department: Department)
   {
     this.selectedDepartment = this.selectedDepartment === department ? null : department;
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DepartmentSelectPage');
+    console.log('ionViewDidLoad DepartmentSelectPage'); 
   }
 
   done()

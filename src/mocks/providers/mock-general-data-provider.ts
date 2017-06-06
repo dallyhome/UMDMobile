@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { Http } from '@angular/http'
 import { Api } from '../../providers/api'
 import { GeneralDataProvider } from '../../providers/general-data-provider'
-import { DEPARTMENTS } from '../DEPARTMENTS'
+// import { DEPARTMENTS } from '../DEPARTMENTS'
 import { ALARMTYPES } from '../ALARMTYPES'
 import { Observable } from 'rxjs/Rx'
 
@@ -20,10 +20,10 @@ export class MockGeneralDataProvider implements GeneralDataProvider {
   constructor(public http: Http) {
   }
   
-  getDepartments() : Observable<string[]>
-  {
-    return Observable.from([DEPARTMENTS]);
-  }
+  // getDepartments() : Observable<string[]>
+  // {
+  //   return Observable.from([DEPARTMENTS]);
+  // }
 
   getAlarmTypes() : Observable<string[]>
   {

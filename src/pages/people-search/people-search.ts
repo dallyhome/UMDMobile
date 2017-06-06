@@ -67,7 +67,8 @@ export class PeopleSearchPage {
             this.searching = false;
             if (search.length > 0)
             {
-              this.getEmployees();
+              var me = this;
+              this.getEmployees().subscribe( m => me.employees = m);    
             }
             else
             {
@@ -77,10 +78,21 @@ export class PeopleSearchPage {
         });    
   }
 
-  getEmployees()
+  getEmployees() : Observable<Employee[]>
   {
     var me = this;
-    this.provider.getEmployees(this.accountProvider.getInxAccount().empNo, this.pattern).subscribe(res => me.employees = res);    
+    // let employees =this.provider.getEmployees(this.accountProvider.getInxAccount().empNo, this.pattern).subscribe(res => me.employees = res);
+    let employees =this.provider.getEmployees(this.accountProvider.getInxAccount().empNo, this.pattern);
+    return employees.map((x, idx) => {
+        let output : Employee[] = [];
+        x.forEach(employee => {
+          if (!me.filterEmployeeIDs.has(employee.empId))
+          {
+            output.push(employee);
+          }      
+        });
+        return output;
+      });
 
   }
 

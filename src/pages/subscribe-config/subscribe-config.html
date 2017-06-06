@@ -21,16 +21,16 @@
     <ion-item-group>
       <ion-item-divider color="light">MAIL</ion-item-divider>
         <!--<ng-container *ngIf="type == 'MAIL'">-->
-        <ion-item *ngFor="let group of groups; let i = index;">{{group.groupId}}<button ion-button color="light" item-right  (click)="doDelete('group',i)"><ion-icon name="remove"></ion-icon> </button></ion-item>   
+        <ion-item *ngFor="let group of groups; let i = index;">{{group.groupName}}<button ion-button color="light" item-right  (click)="doDelete('group',i)"><ion-icon name="remove"></ion-icon> </button></ion-item>   
         <ion-item *ngFor="let employee of employees; let i = index;">{{employee.name}}<button ion-button color="light" item-right  (click)="doDelete('employee',i)"><ion-icon name="remove"></ion-icon> </button></ion-item>   
-        <ion-item *ngFor="let department of departments; let i = index;">{{department}}<button ion-button color="light" item-right  (click)="doDelete('department',i)"><ion-icon name="remove"></ion-icon> </button></ion-item>   
+        <ion-item *ngFor="let department of departments; let i = index;">{{department.deptName}}<button ion-button color="light" item-right  (click)="doDelete('department',i)"><ion-icon name="remove"></ion-icon> </button></ion-item>   
         <!--</ng-container>-->
     </ion-item-group>
 
     <ion-item-group>
       <ion-item-divider color="light">MAPP</ion-item-divider>
         <!--<ng-container *ngIf="type == 'MAPP'">-->
-        <ion-item *ngFor="let group of pgroups; let i = index;">{{group.groupId}}<button ion-button color="light" item-right  (click)="doDelete('pgroup',i)"><ion-icon name="remove"></ion-icon> </button></ion-item>   
+        <ion-item *ngFor="let group of pgroups; let i = index;">{{group.groupName}}<button ion-button color="light" item-right  (click)="doDelete('pgroup',i)"><ion-icon name="remove"></ion-icon> </button></ion-item>   
         <ion-item *ngFor="let employee of pemployees; let i = index;">{{employee.name}}<button ion-button color="light" item-right  (click)="doDelete('pemployee',i)"><ion-icon name="remove"></ion-icon> </button></ion-item>   
         <ion-item *ngFor="let mappgroup of mappgroups; let i = index;">{{mappgroup.description}}<button ion-button color="light" item-right  (click)="doDelete('mappgroup',i)"><ion-icon name="remove"></ion-icon> </button></ion-item>   
         <!--</ng-container>-->

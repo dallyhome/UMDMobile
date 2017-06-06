@@ -12,7 +12,7 @@ import { DepartmentSelectPage } from '../department-select/department-select';
 })
 export class GroupEditPage {
   group: Group
-  items: string[] = [];
+  nemployees: string[] = [];
   // items: string[] = ['CIM'];
   constructor(public navCtrl: NavController, public navParams: NavParams, public menu: MenuController) {
     this.group = this.navParams.get('group');
@@ -20,7 +20,7 @@ export class GroupEditPage {
 
   SearchClick()
   {
-   this.navCtrl.push(PeopleSearchPage, {'callback': this.callbackFunction, 'pageTitle': "選擇員工", 'filterEmployees': this.items})
+   this.navCtrl.push(PeopleSearchPage, {'callback': this.callbackFunction, 'pageTitle': "選擇員工", 'filterEmployees': this.nemployees})
   }
   
   callbackFunction = (params) => 
@@ -29,7 +29,7 @@ export class GroupEditPage {
             if (params)
             {
 //              this.groups.push(params);
-              this.items.push(params);
+              this.nemployees.push(params);
             }
             resolve();
          });
@@ -37,7 +37,7 @@ export class GroupEditPage {
 
   doDelete(i): void
   {
-   this.items.splice(i, 1);   
+   this.nemployees.splice(i, 1);   
   }
 
 }

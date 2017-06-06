@@ -18,7 +18,7 @@ export class GroupsPage {
   constructor(public navCtrl: NavController, public provider: GroupProvider
                                     , public accountProvider: AccountProvider) {
       var me: GroupsPage = this;
-      provider.getGroups(this.accountProvider.getInxAccount().empNo).subscribe(
+      provider.getGroups(this.accountProvider.getInxAccount().empNo,'').subscribe(
           value => me.groups = value,
           error => me.groups = [],
           () => console.log("done")

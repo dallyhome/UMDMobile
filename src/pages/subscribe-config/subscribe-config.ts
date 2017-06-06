@@ -150,6 +150,7 @@ export class SubscribeConfigPage {
           text: 'Mail-選擇部門',
           icon: !this.platform.is('ios') ? 'arrow-dropright-circle' : null,
           handler: () => {
+            this.mode = 'department';
             this.navCtrl.push(DepartmentSelectPage, {'callback': this.callbackFunction, 'pageTitle': "選擇部門", 'filterDepartments': this.departments})
           }
         },
@@ -157,6 +158,7 @@ export class SubscribeConfigPage {
           text: 'MAPP-選擇群組',
           icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
+            this.mode = 'pgroup';
             this.navCtrl.push(GroupSearchPage, {'callback': this.callbackFunction, 'pageTitle': "選擇群組", 'filterGroups': this.pgroups})
           }
         },
@@ -164,6 +166,7 @@ export class SubscribeConfigPage {
           text: 'MAPP-選擇人員',
           icon: !this.platform.is('ios') ? 'share' : null,
           handler: () => {
+            this.mode = 'pemployee';
             this.navCtrl.push(PeopleSearchPage, {'callback': this.callbackFunction, 'pageTitle': "選擇員工", 'filterEmployees': this.pemployees})
           }
         },
@@ -171,6 +174,7 @@ export class SubscribeConfigPage {
           text: 'MAPP-輸入聊天室ID',
           icon: !this.platform.is('ios') ? 'arrow-dropright-circle' : null,
           handler: () => {
+            this.mode = 'mappgroup';
             this.navCtrl.push(SubscribeMappgroupPage, {'callback': this.callbackFunction} )
           }
         },

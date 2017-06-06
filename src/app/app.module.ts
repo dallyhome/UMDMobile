@@ -34,8 +34,10 @@ import { EmployeeComponent } from '../component/employee/employee.component'
 import { GroupEditComponent } from '../component/group-edit/group-edit.component'
 import { MessageCategoryComponent } from '../component/message-category/message-category.component'
 import { SubscriptionComponent } from '../component/subscription/subscription.component'
+import { DepartmentComponent } from '../component/department/department.component';
 import { MessageProvider } from '../providers/message-provider'
 import { GroupProvider } from '../providers/group-provider'
+import { DepartmentProvider } from '../providers/department-provider'
 import { AppConfig } from '../providers/app-config'
 import { GeneralDataProvider } from '../providers/general-data-provider'
 import { AccountProvider } from '../providers/account-provider'
@@ -45,10 +47,13 @@ import { SubscriptionProvider } from '../providers/subscription-provider'
 import { UmdGroupProvider } from '../providers/umd-group-provider'
 import { UmdMessageProvider } from '../providers/umd-message-provider'
 import { UmdEmployeeProvider } from '../providers/umd-employee-provider'
+import { UmdDepartmentProvider } from '../providers/umd-department-provider'
+import { UmdGeneralDataProvider } from '../providers/umd-general-data-provider'
 import { AlarmSubjectProvider } from '../providers/alarm-subject-provider'
 import { MockAlarmSubjectProvider } from '../mocks/providers/mock-alarm-subject-provider'
 import { MockEmployeeProvider } from '../mocks/providers/mock-employee-provider'
 import { MockGroupProvider } from '../mocks/providers/mock-group-provider'
+import { MockDepartmentProvider } from '../mocks/providers/mock-department-provider'
 import { MockGeneralDataProvider } from '../mocks/providers/mock-general-data-provider'
 import { MockMappGroupProvider } from '../mocks/providers/mock-mappgroup-provider'
 import { MockMessageProvider } from '../mocks/providers/mock-message-provider'
@@ -84,7 +89,8 @@ import { MockAccountProvider } from '../mocks/providers/mock-account-provider'
     GroupSearchPage,
     DepartmentSelectPage,
     ConfigPage,
-    TabsPage
+    TabsPage,
+    DepartmentComponent
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -118,7 +124,8 @@ import { MockAccountProvider } from '../mocks/providers/mock-account-provider'
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler} 
             , {provide: GroupProvider, useClass: UmdGroupProvider}
             , {provide: EmployeeProvider, useClass: UmdEmployeeProvider}
-            , {provide: GeneralDataProvider, useClass: MockGeneralDataProvider}
+            , {provide: DepartmentProvider, useClass: UmdDepartmentProvider}
+            , {provide: GeneralDataProvider, useClass: UmdGeneralDataProvider}
             , {provide: MessageProvider, useClass: MockMessageProvider}
             , AppConfig
             , ExtraInfoProvider

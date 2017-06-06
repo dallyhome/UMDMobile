@@ -11,10 +11,10 @@ import { AccountProvider } from '../../providers/account-provider'
 export class MockAccountProvider implements AccountProvider
 {
     static account: InxAccount = {
-          'comid': "guy.mai",
+          'comid': "sharon.tsai",
           'deveceKey': "",
-          'empNo': "10004698",
-          'name': "買家暉",
+          'empNo': "14127785",
+          'name': "蔡世真",
           'accessToken': "",
           'refreshToken': ""
         };

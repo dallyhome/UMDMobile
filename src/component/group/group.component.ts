@@ -12,8 +12,8 @@ export class GroupComponent
     checked: Boolean = false;
     @Input()
     group : Group;
-    @Input()
-    navCtrl: NavController;    
+    // @Input()
+    // navCtrl: NavController;    
     constructor()
     {
     }

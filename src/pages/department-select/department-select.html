@@ -15,7 +15,13 @@
 
 
 <ion-content padding>
-    <ion-item *ngFor="let department of departments" (click)="selectDepartment(department)">
-      <ion-icon [name]="selectedDepartment !== department ? '' : 'checkmark'" item-left></ion-icon>{{department}}
-    </ion-item>
+  <ion-searchbar
+    [(ngModel)]="pattern"
+    [showCancelButton]="shouldShowCancel"
+    (ionInput)="onInput($event)"
+    (ionCancel)="onCancel($event)">
+  </ion-searchbar>
+  <ion-list>
+    <department *ngFor="let department of departments" [department]="department" [checked]="selectedDepartment == department" (click)="selectDepartment(department)"></department>
+  </ion-list>
 </ion-content>

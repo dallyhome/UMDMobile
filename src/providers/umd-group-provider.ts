@@ -30,14 +30,13 @@ export class UmdGroupProvider implements GroupProvider {
        let url = 'http://c4c010685.cminl.oa/UMD/Services/UMDDataService.svc/GetGroupData';
 //     let url = 'http://tnvtwebapi.cminl.oa/NewWebApi/Agency/api/service/e1c5da29-9bf6-cf83-72fb-76d287c98bdb';
 
-     let body = {"EmpId": `${empId}`};
-     let output = [];
+     let body = {"EmpId": `${empId}`, "Keyword": `${pattern}`};
+    //  let output = [];
      let err = "";
      console.log('post start');
      return this.http.post(url, body, options).map(res => 
                       Api.toCamel(res.json()).groupDataList
                     );
-     
   }
 
   updateGroup(user: string, group: Group)
