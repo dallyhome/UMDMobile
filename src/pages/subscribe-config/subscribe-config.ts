@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { SubscribeConfigSearchPage } from '../subscribe-config-search/subscribe-config-search';
 import { SubscribeEditPage } from '../subscribe-edit/subscribe-edit';
 import { GroupSearchPage } from '../group-search/group-search';
 import { PeopleSearchPage } from '../people-search/people-search';
@@ -27,50 +26,18 @@ export class SubscribeConfigPage {
   pemployees: string[] = [];
   mappgroups: string[] = [];
   mode: string;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events, public platform: Platform,
     public actionsheetCtrl: ActionSheetController) {
-      events.subscribe('gotoSearch',(mode) => {
-        this.mode = mode;
-        this.gotoSearch();
-      });      
-      
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SubscribeConfigPage');
   }
 
-  gotoConfigSearch(): void
-  {
-      this.navCtrl.push(SubscribeConfigSearchPage);
-  }
-
   gotoEdit(): void
   {
-      this.navCtrl.push(SubscribeEditPage, );
-  }
-
-  gotoSearch():void
-  {
-      if (this.mode == 'group')
-      {
-        this.navCtrl.push(GroupSearchPage, {'callback': this.callbackFunction, 'pageTitle': "選擇群組", 'filterGroups': this.groups})
-      }else if (this.mode == 'employee')
-      {
-        this.navCtrl.push(PeopleSearchPage, {'callback': this.callbackFunction, 'pageTitle': "選擇員工", 'filterEmployees': this.employees})
-      }else if (this.mode == 'department')
-      {
-        this.navCtrl.push(DepartmentSelectPage, {'callback': this.callbackFunction, 'pageTitle': "選擇部門", 'filterDepartments': this.departments})
-      }else if (this.mode == 'pgroup')
-      {
-        this.navCtrl.push(GroupSearchPage, {'callback': this.callbackFunction, 'pageTitle': "選擇群組", 'filterGroups': this.pgroups})
-      }else if (this.mode == 'pemployee')
-      {
-        this.navCtrl.push(PeopleSearchPage, {'callback': this.callbackFunction, 'pageTitle': "選擇員工", 'filterEmployees': this.pemployees})
-      }else if (this.mode == 'mappgroup')
-      {
-        this.navCtrl.push(SubscribeMappgroupPage, {'callback': this.callbackFunction} )
-      }    
+      this.navCtrl.pop(SubscribeEditPage);
   }
 
   callbackFunction = (params) => 
@@ -125,68 +92,87 @@ export class SubscribeConfigPage {
               }     
   }
 
-  openMenu() {
-    let actionSheet = this.actionsheetCtrl.create({
-      title: '通知方式',
-      cssClass: 'action-sheets-basic-page',
-      buttons: [
-        {
-          text: 'Mail-選擇群組',
-          icon: !this.platform.is('ios') ? 'trash' : null,
-          handler: () => {
-            this.mode = 'group';
-            this.navCtrl.push(GroupSearchPage, {'callback': this.callbackFunction, 'pageTitle': "選擇群組", 'filterGroups': this.groups})
-          }
-        },
-        {
-          text: 'Mail-選擇人員',
-          icon: !this.platform.is('ios') ? 'share' : null,
-          handler: () => {
-            this.mode = 'employee';            
-            this.navCtrl.push(PeopleSearchPage, {'callback': this.callbackFunction, 'pageTitle': "選擇員工", 'filterEmployees': this.employees})
-          }
-        },
-        {
-          text: 'Mail-選擇部門',
-          icon: !this.platform.is('ios') ? 'arrow-dropright-circle' : null,
-          handler: () => {
+  openMenu(menuType: number) {
+    let menuButtons = undefined;
+    switch(menuType)
+    {
+      case 1:
+        menuButtons = [
+          {
+            text: 'Mail-選擇群組',
+            icon: !this.platform.is('ios') ? 'trash' : null,
+            handler: () => {
+              this.mode = 'group';
+              this.navCtrl.push(GroupSearchPage, {'callback': this.callbackFunction, 'pageTitle': "選擇群組", 'filterGroups': this.groups})
+            }
+          },
+          {
+            text: 'Mail-選擇人員',
+            icon: !this.platform.is('ios') ? 'share' : null,
+            handler: () => {
+              this.mode = 'employee';            
+              this.navCtrl.push(PeopleSearchPage, {'callback': this.callbackFunction, 'pageTitle': "選擇人員", 'filterEmployees': this.employees})
+            }
+          },
+          {
+            text: 'Mail-選擇部門',
+            icon: !this.platform.is('ios') ? 'arrow-dropright-circle' : null,
+            handler: () => {
             this.mode = 'department';
-            this.navCtrl.push(DepartmentSelectPage, {'callback': this.callbackFunction, 'pageTitle': "選擇部門", 'filterDepartments': this.departments})
+              this.navCtrl.push(DepartmentSelectPage, {'callback': this.callbackFunction, 'pageTitle': "選擇部門", 'filterDepartments': this.departments})
+            }
+          },
+          {
+            text: 'Cancel',
+            role: 'cancel', // will always sort to be on the bottom
+            icon: !this.platform.is('ios') ? 'close' : null,
+            handler: () => {
+              console.log('Cancel clicked');
+            }
           }
-        },
-        {
-          text: 'MAPP-選擇群組',
-          icon: !this.platform.is('ios') ? 'trash' : null,
-          handler: () => {
+        ];
+        break;
+      case 2:
+        menuButtons = [
+          {
+            text: 'MAPP-選擇群組',
+            icon: !this.platform.is('ios') ? 'trash' : null,
+            handler: () => {
             this.mode = 'pgroup';
-            this.navCtrl.push(GroupSearchPage, {'callback': this.callbackFunction, 'pageTitle': "選擇群組", 'filterGroups': this.pgroups})
-          }
-        },
-        {
-          text: 'MAPP-選擇人員',
-          icon: !this.platform.is('ios') ? 'share' : null,
-          handler: () => {
+              this.navCtrl.push(GroupSearchPage, {'callback': this.callbackFunction, 'pageTitle': "選擇群組", 'filterGroups': this.pgroups})
+            }
+          },
+          {
+            text: 'MAPP-選擇人員',
+            icon: !this.platform.is('ios') ? 'share' : null,
+            handler: () => {
             this.mode = 'pemployee';
-            this.navCtrl.push(PeopleSearchPage, {'callback': this.callbackFunction, 'pageTitle': "選擇員工", 'filterEmployees': this.pemployees})
-          }
-        },
-        {
-          text: 'MAPP-輸入聊天室ID',
-          icon: !this.platform.is('ios') ? 'arrow-dropright-circle' : null,
-          handler: () => {
+              this.navCtrl.push(PeopleSearchPage, {'callback': this.callbackFunction, 'pageTitle': "選擇人員", 'filterEmployees': this.pemployees})
+            }
+          },
+          {
+            text: 'MAPP-輸入聊天室ID',
+            icon: !this.platform.is('ios') ? 'arrow-dropright-circle' : null,
+            handler: () => {
             this.mode = 'mappgroup';
-            this.navCtrl.push(SubscribeMappgroupPage, {'callback': this.callbackFunction} )
+              this.navCtrl.push(SubscribeMappgroupPage, {'callback': this.callbackFunction} )
+            }
+          },
+          {
+            text: 'Cancel',
+            role: 'cancel', // will always sort to be on the bottom
+            icon: !this.platform.is('ios') ? 'close' : null,
+            handler: () => {
+              console.log('Cancel clicked');
+            }
           }
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel', // will always sort to be on the bottom
-          icon: !this.platform.is('ios') ? 'close' : null,
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
+        ];
+        break;
+    }
+    let actionSheet = this.actionsheetCtrl.create({
+      title: '通知對象',
+      cssClass: 'action-sheets-basic-page',
+      buttons: menuButtons
     });
     actionSheet.present();
   }

@@ -12,14 +12,9 @@
 </ion-header>
 
 <ion-content>
-  <!--<ion-fab top right edge>
-    <button ion-fab  color="secondary" mini><ion-icon name="checkmark"></ion-icon></button>
-  </ion-fab>-->  
-  <!--<button (click)="gotoSearch()">Refresh</button>-->
-
   <ion-list>
     <ion-item-group>
-      <ion-item-divider color="light">MAIL</ion-item-divider>
+      <ion-item-divider color="light">MAIL<button ion-button item-right (click)="openMenu(1)"><ion-icon name="add"></ion-icon> </button></ion-item-divider>
         <!--<ng-container *ngIf="type == 'MAIL'">-->
         <ion-item *ngFor="let group of groups; let i = index;">{{group.groupName}}<button ion-button color="light" item-right  (click)="doDelete('group',i)"><ion-icon name="remove"></ion-icon> </button></ion-item>   
         <ion-item *ngFor="let employee of employees; let i = index;">{{employee.name}}<button ion-button color="light" item-right  (click)="doDelete('employee',i)"><ion-icon name="remove"></ion-icon> </button></ion-item>   
@@ -28,7 +23,7 @@
     </ion-item-group>
 
     <ion-item-group>
-      <ion-item-divider color="light">MAPP</ion-item-divider>
+      <ion-item-divider color="light">MAPP<button ion-button item-right (click)="openMenu(2)"><ion-icon name="add"></ion-icon> </button></ion-item-divider>
         <!--<ng-container *ngIf="type == 'MAPP'">-->
         <ion-item *ngFor="let group of pgroups; let i = index;">{{group.groupName}}<button ion-button color="light" item-right  (click)="doDelete('pgroup',i)"><ion-icon name="remove"></ion-icon> </button></ion-item>   
         <ion-item *ngFor="let employee of pemployees; let i = index;">{{employee.name}}<button ion-button color="light" item-right  (click)="doDelete('pemployee',i)"><ion-icon name="remove"></ion-icon> </button></ion-item>   
@@ -36,34 +31,4 @@
         <!--</ng-container>-->
     </ion-item-group>
   </ion-list>
-
-  <ion-fab right bottom>
-    <button ion-fab mini color="danger" (click)="openMenu()" ><ion-icon name="add"></ion-icon></button>
-  </ion-fab>
-
-
-
-  <!--<ion-list>
-    <ion-item-group>
-      <ion-item-divider color="light">MAIL<button ion-button item-right (click)="gotoConfigSearch('MAIL')"><ion-icon name="add"></ion-icon> </button></ion-item-divider>
-        <ion-item >Apple<button ion-button color="light" item-right ><ion-icon name="remove"></ion-icon> </button></ion-item>        
-        <ion-item >James<button ion-button color="light" item-right ><ion-icon name="remove"></ion-icon> </button></ion-item>        
-        <ion-item >Jane<button ion-button color="light" item-right ><ion-icon name="remove"></ion-icon> </button></ion-item>
-        <ng-container *ngIf="type == 'MAIL'">
-        <ion-item *ngFor="let group of groups; let i = index;">{{group.groupId}}<button ion-button color="light" item-right ><ion-icon name="remove"></ion-icon> </button></ion-item>   
-        <ion-item *ngFor="let employee of employees; let i = index;">{{employee.name}}<button ion-button color="light" item-right ><ion-icon name="remove"></ion-icon> </button></ion-item>   
-        <ion-item *ngFor="let department of departments; let i = index;">{{department}}<button ion-button color="light" item-right ><ion-icon name="remove"></ion-icon> </button></ion-item>   
-        </ng-container>
-    </ion-item-group>
-
-    <ion-item-group  >
-      <ion-item-divider color="light">MAPP<button ion-button item-right (click)="gotoConfigSearch('MAPP')"><ion-icon name="add"></ion-icon> </button></ion-item-divider>
-        <ng-container *ngIf="type == 'MAPP'">
-        <ion-item *ngFor="let group of groups; let i = index;">{{group.groupId}}<button ion-button color="light" item-right ><ion-icon name="remove"></ion-icon> </button></ion-item>   
-        <ion-item *ngFor="let employee of employees; let i = index;">{{employee.name}}<button ion-button color="light" item-right ><ion-icon name="remove"></ion-icon> </button></ion-item>   
-        </ng-container>
-      <ion-item >工程一部<button ion-button color="light" item-right ><ion-icon name="remove"></ion-icon> </button></ion-item>
-      <ion-item >Angela<button ion-button color="light" item-right><ion-icon name="remove"></ion-icon> </button></ion-item>
-    </ion-item-group>
-  </ion-list>-->
 </ion-content>

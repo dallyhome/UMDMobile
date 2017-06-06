@@ -21,7 +21,6 @@ import { SubscribePage } from '../pages/subscribe/subscribe'
 import { SubscribeAddPage } from '../pages/subscribe-add/subscribe-add'
 import { SubscribeEditPage } from '../pages/subscribe-edit/subscribe-edit'
 import { SubscribeConfigPage } from '../pages/subscribe-config/subscribe-config'
-import { SubscribeConfigSearchPage } from '../pages/subscribe-config-search/subscribe-config-search'
 import { SubscribeMappgroupPage } from '../pages/subscribe-mappgroup/subscribe-mappgroup'
 import { TabsPage } from '../pages/tabs/tabs'
 import { PeopleSearchPage } from '../pages/people-search/people-search'
@@ -74,7 +73,6 @@ import { MockAccountProvider } from '../mocks/providers/mock-account-provider'
     SubscribeAddPage,
     SubscribeEditPage,
     SubscribeConfigPage,
-    SubscribeConfigSearchPage,
     SubscribeMappgroupPage,
     GroupsPage,
     GroupEditPage,
@@ -110,7 +108,6 @@ import { MockAccountProvider } from '../mocks/providers/mock-account-provider'
     SubscribeAddPage,
     SubscribeEditPage,
     SubscribeConfigPage,
-    SubscribeConfigSearchPage,
     SubscribeMappgroupPage,
     GroupsPage,
     GroupEditPage,

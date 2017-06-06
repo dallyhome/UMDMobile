@@ -20,7 +20,7 @@ export class GroupEditPage {
 
   SearchClick()
   {
-   this.navCtrl.push(PeopleSearchPage, {'callback': this.callbackFunction, 'pageTitle': "選擇員工", 'filterEmployees': this.nemployees})
+   this.navCtrl.push(PeopleSearchPage, {'callback': this.callbackFunction, 'pageTitle': "選擇人員", 'filterEmployees': this.nemployees})
   }
   
   callbackFunction = (params) => 

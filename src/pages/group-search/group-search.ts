@@ -33,6 +33,10 @@ export class GroupSearchPage {
       });
     }
     var me = this;
+    this.getGroups(this.accountProvider.getInxAccount().empNo, this.pattern).subscribe({
+        next: m => me.groups = m,
+        error: (result) => console.log(result)
+    });    
     this.pattern ="";
     this.getGroups(this.accountProvider.getInxAccount().empNo, this.pattern).subscribe(m => me.groups = m);
     let title: string = navParams.get("pageTitle");
@@ -46,14 +50,18 @@ export class GroupSearchPage {
   {
       var me = this;
       let groups = this.provider.getGroups(owner, pattern);
-      return groups.map((x, idx) => {
+      return groups.map(x => {
         let output : Group[] = [];
-        x.forEach(group => {
-          if (!me.filterGroupIDs.has(group.groupId))
-          {
-            output.push(group);
-          }      
-        });
+        if (x != null)
+        {
+          x.forEach(group => {
+            if (!me.filterGroupIDs.has(group.groupId))
+            {
+              output.push(group);
+            }      
+          
+          });
+        }
         return output;
       });
   }

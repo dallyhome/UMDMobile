@@ -35,7 +35,7 @@
         <ion-icon name="menu"></ion-icon>
       </button>-->
       <!--</ion-buttons><ion-title>Message</ion-title>-->
-    </ion-buttons><ion-title>Subscribe</ion-title>
+    </ion-buttons><ion-title>訂閱管理</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -43,6 +43,7 @@
 
 <ion-content padding #content>
   <ion-list>
+    <ion-item-divider color="light">請選擇Alarm類別</ion-item-divider>
     <ion-item *ngFor="let alarmtype of alarmtypes" (click)="gotoEdit(alarmtype)">{{alarmtype}}</ion-item>
   </ion-list>
 </ion-content>
