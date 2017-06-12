@@ -1,4 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core'
+import { Push } from '@ionic-native/push'
+import { LocalNotifications } from '@ionic-native/local-notifications';
 import { HttpModule, Http } from '@angular/http'
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular'
 import { XHRBackend, RequestOptions } from '@angular/http'
@@ -63,6 +65,7 @@ import { MockMappGroupProvider } from '../mocks/providers/mock-mappgroup-provide
 import { MockMessageProvider } from '../mocks/providers/mock-message-provider'
 import { MockSubscriptionProvider } from '../mocks/providers/mock-subscription-provider'
 import { MockAccountProvider } from '../mocks/providers/mock-account-provider'
+
 @NgModule({
   declarations: [
     MyApp,
@@ -122,30 +125,41 @@ import { MockAccountProvider } from '../mocks/providers/mock-account-provider'
     ConfigPage,
     TabsPage
   ],
-
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler} 
+  providers: [
+              {provide: ErrorHandler, useClass: IonicErrorHandler} 
             , {provide: GroupProvider, useClass: UmdGroupProvider}
             , {provide: EmployeeProvider, useClass: UmdEmployeeProvider}
             , {provide: DepartmentProvider, useClass: UmdDepartmentProvider}
             , {provide: GeneralDataProvider, useClass: UmdGeneralDataProvider}
             , {provide: MessageProvider, useClass: MockMessageProvider}
-            , AppConfig
-            , ExtraInfoProvider
             , {provide: SubscriptionProvider, useClass: UmdSubscriptionProvider}
             , {provide: AlarmProvider, useClass: UmdAlarmProvider}
             , {provide: MappGroupProvider, useClass: MockMappGroupProvider}
-            , {provide: AccountProvider, useClass: MockAccountProvider}
+            , AppConfig
+            , ExtraInfoProvider
+            , LocalNotifications
+            , Push
             , StatusBar
             , SQLite
             , SplashScreen
+//for web
+            , {provide: AccountProvider, useClass: MockAccountProvider}
             , {
                 provide: Http,
                 useFactory: (backend: XHRBackend, options: RequestOptions, extraInfoProvider: ExtraInfoProvider) => {
-//                  return new InterceptedHttp(backend, options, extraInfoProvider);
                   return new Http(backend, options);
                 },
                 deps: [XHRBackend, RequestOptions, ExtraInfoProvider]
               }
-            ]
+//for device/emulator
+            // , {provide: AccountProvider, useClass: ExtraInfoProvider}
+            // , {
+            //     provide: Http,
+            //     useFactory: (backend: XHRBackend, options: RequestOptions, extraInfoProvider: ExtraInfoProvider) => {
+            //       return new InterceptedHttp(backend, options, extraInfoProvider);
+            //     },
+            //     deps: [XHRBackend, RequestOptions, ExtraInfoProvider]
+            //   }
+            // ]
 })
 export class AppModule {}

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable'
 import { InxAccount } from '../../models/inx-account'
 import { AccountProvider } from '../../providers/account-provider'
 /*
@@ -10,7 +11,7 @@ import { AccountProvider } from '../../providers/account-provider'
 @Injectable()
 export class MockAccountProvider implements AccountProvider
 {
-    static account: InxAccount = {
+    static sharon: InxAccount =  {
           'comid': "sharon.tsai",
           'deveceKey': "",
           'empNo': "14127785",
@@ -18,13 +19,24 @@ export class MockAccountProvider implements AccountProvider
           'accessToken': "",
           'refreshToken': ""
         };
+    static account: InxAccount = undefined;
     constructor()
     {
 
     }
     getInxAccount() : InxAccount
-    {
-        return MockAccountProvider.account;
+    {   
+        return MockAccountProvider.account;        
+    }
+
+    getUserInfo(): Observable<InxAccount> {
+        return Observable.create(observer => {
+            setTimeout(() => {
+            MockAccountProvider.account = MockAccountProvider.sharon;
+            observer.next(MockAccountProvider.account);
+            observer.complete();
+            }, 5000);
+        });
     }
 
 }

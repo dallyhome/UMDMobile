@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { InxAccount } from '../models/inx-account';
+import { Observable } from 'rxjs/Observable'
 
 
 /*
@@ -10,4 +11,5 @@ import { InxAccount } from '../models/inx-account';
 */
 export abstract class AccountProvider  {
   abstract getInxAccount() : InxAccount;
+  abstract getUserInfo(): Observable<InxAccount>;
 }

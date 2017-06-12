@@ -14,7 +14,7 @@ declare var ExtraInfo: any;
 @Injectable()
 export class ExtraInfoProvider implements AccountProvider
 {
-    static account: InxAccount = null;
+    private static account: InxAccount;
     constructor(public appConfig: AppConfig)
     {
 
@@ -28,20 +28,22 @@ export class ExtraInfoProvider implements AccountProvider
     authInfoData: Observable<any> = null;
     authResult : Observable<any>;
     accessToken: string;
-    getUserInfo(): Observable<any> {
+    getUserInfo(): Observable<InxAccount> {
         var me: ExtraInfoProvider = this;
         return Observable.create(observer => {
             ExtraInfo.getUserInfo(
                 (result) => {
                     me.accessToken = result["accessToken"];
+                    ExtraInfoProvider.account = result;
                     observer.next(result);
                     observer.complete();
-                    ExtraInfoProvider.account = result;
                 }, 
                 (err) => {
                     me.accessToken = "";
-                    observer.next(err);
+                    ExtraInfoProvider.account = undefined;
+//                    observer.next(err);
                     observer.error();
+                    observer.complete();                    
                 }, this.appConfig.appID)
         })
     }
