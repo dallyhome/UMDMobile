@@ -1,4 +1,5 @@
 import { Group } from '../models/group';
+import { Employee } from '../models/employee';
 import { Observable } from 'rxjs/Rx'
 
 /*
@@ -9,6 +10,8 @@ import { Observable } from 'rxjs/Rx'
 */
 export abstract class GroupProvider  {
   abstract getGroups(owner: string, pattern?: string) : Observable<Group[]>;
-  abstract updateGroup(user: string, group: Group);
-  abstract deleteGroup(user: string, groupId: string);
+  abstract getGroupEmployee(groupId:string) : Observable<Employee[]>
+  abstract addGroup(groupName: string,description:string,groupUsers:string[],empId:string): Observable<boolean>
+  abstract updateGroup(groupId: string, groupName: string, description:string,leftGroupUsers:string[],newGroupUsers:string[],empId:string): Observable<boolean>
+  abstract deleteGroup(groupId: string,empId: string): Observable<boolean>
 }

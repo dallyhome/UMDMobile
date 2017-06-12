@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core'
 import { Http, Headers, RequestOptions } from '@angular/http'
 import { Api } from './api'
 import { Group } from '../models/group'
+import { Employee } from '../models/employee';
 import { GroupProvider } from './group-provider'
+import { GroupDetail } from '../models/group-detail';
 import { InterceptedHttp} from '../app/intercepted-http'
 import { Observable } from 'rxjs/Rx'
 
@@ -27,8 +29,10 @@ export class UmdGroupProvider implements GroupProvider {
      let options = new RequestOptions({ headers: headers });
 
 //     let url = 'http://localhost:3000/getGroups';
-       let url = 'http://c4c010685.cminl.oa/UMD/Services/UMDDataService.svc/GetGroupData';
+      //  let url = 'http://c4c010685.cminl.oa/UMD/Services/UMDDataService.svc/GetGroupData';
 //     let url = 'http://tnvtwebapi.cminl.oa/NewWebApi/Agency/api/service/e1c5da29-9bf6-cf83-72fb-76d287c98bdb';
+
+     let url = Api.getHttpUrl('GetGroupData');
 
      let body = {"EmpId": `${empId}`, "Keyword": `${pattern}`};
     //  let output = [];
@@ -39,14 +43,72 @@ export class UmdGroupProvider implements GroupProvider {
                     );
   }
 
-  updateGroup(user: string, group: Group)
+  getGroupEmployee(groupId:string) : Observable<Employee[]>
   {
+     let headers = new Headers({ 'Content-Type': 'application/json' });
+     let options = new RequestOptions({ headers: headers });
 
+     let url = Api.getHttpUrl('GetGroupDetailData');
+
+     let body = {"GroupId": `${groupId}`};
+     let err = "";
+     console.log('post start');
+     
+     return this.http.post(url, body, options).map(res => 
+                      Api.toCamel(res.json()).groupData.groupUserList
+                    );
   }
 
-  deleteGroup(user: string, groupId: string)
+  addGroup(groupName: string,description:string,groupUsers:string[],empId:string): Observable<boolean>
   {
+     let headers = new Headers({ 'Content-Type': 'application/json' });
+     let options = new RequestOptions({ headers: headers });
 
+     let url = Api.getHttpUrl('InsertGroup');
+
+     let body = {"GroupName": `${groupName}`,"Description": `${description}`,"GroupUsers": groupUsers,"EmpId": `${empId}`};
+     console.log('post start');
+     
+     return this.http.post(url, body, options).map(res => 
+                      Api.toCamel(res.json()).isSuccess
+                    );
+  }
+
+  updateGroup(groupId: string, groupName: string, description:string,leftGroupUsers:string[],newGroupUsers:string[],empId:string): Observable<boolean>
+  {
+     let headers = new Headers({ 'Content-Type': 'application/json' });
+     let options = new RequestOptions({ headers: headers });
+
+     let url = Api.getHttpUrl('ModifyGroup');
+
+    //  let gid:number = parseInt(groupId);
+
+     let body = {"GroupId": groupId,"GroupName": `${groupName}`,"Description": `${description}`,
+                 "LeftGroupUsers": leftGroupUsers,"NewGroupUsers": newGroupUsers,"EmpId": `${empId}`};
+     let err = "";
+     console.log('post start');
+     
+     return this.http.post(url, body, options).map(res => 
+                      Api.toCamel(res.json()).isSuccess
+                    );
+  }
+
+  deleteGroup(groupId: string,empId: string): Observable<boolean>
+  {
+     let headers = new Headers({ 'Content-Type': 'application/json' });
+     let options = new RequestOptions({ headers: headers });
+
+     let url = Api.getHttpUrl('DeleteGroup');
+
+    //  let gid:number = parseInt(groupId);
+
+     let body = {"GroupId": groupId,"EmpId": `${empId}`};
+
+     console.log('post start');
+     
+     return this.http.post(url, body, options).map(res => 
+                      Api.toCamel(res.json()).isSuccess
+                    );
   }
   
 }

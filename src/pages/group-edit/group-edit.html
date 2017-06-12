@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-buttons end>
-      <button ion-button >完成
+      <button ion-button (click)="done()">完成
       </button>
     </ion-buttons><ion-title>編輯群組</ion-title>  
   </ion-navbar>
@@ -15,22 +15,18 @@
       <ion-item-divider color="light">群組資訊</ion-item-divider>
       <ion-item>
         <ion-label >群組名稱</ion-label>
-        <ion-input type="text" placeholder="{{group == null || group.groupName == null || group.groupName == '' ? '' : group.groupName}}"></ion-input>
+        <ion-input type="text" [(ngModel)]="groupName" ></ion-input>
       </ion-item> 
       <ion-item>
         <ion-label >描述</ion-label>
-        <ion-input type="text" placeholder="{{group == null || group.description == null || group.description == '' ? '' : group.description}}"></ion-input>
+        <ion-input type="text" [(ngModel)]="description" ></ion-input>
       </ion-item>
     </ion-item-group>
 
     <ion-item-group  >
       <ion-item-divider color="light">人員<button ion-button item-right (click)="SearchClick()"><ion-icon name="add"></ion-icon> </button></ion-item-divider>
-      <ion-item *ngIf="group != null">Angola<button ion-button color="light" item-right (click)="doDelete(0)"><ion-icon name="remove"></ion-icon> </button></ion-item>
-      <ion-item *ngIf="group != null">Argentina<button ion-button color="light" item-right (click)="doDelete(1)"><ion-icon name="remove"></ion-icon> </button></ion-item>
-      <!--<ion-item *ngIf="group != null">Armenia<button ion-button color="light" item-right><ion-icon name="remove"></ion-icon> </button></ion-item>
-      <ion-item *ngIf="group != null">Australia<button ion-button color="light" item-right><ion-icon name="remove"></ion-icon> </button></ion-item>
-      <ion-item *ngIf="group != null">Austria<button ion-button color="light" item-right><ion-icon name="remove"></ion-icon> </button></ion-item>-->
-      <ion-item *ngFor="let employee of nemployees; let i = index;">{{employee.name}}<button ion-button color="light" item-right (click)="doDelete(i)"><ion-icon name="remove"></ion-icon> </button></ion-item>
+      <ion-item *ngFor="let oemployee of oemployees; let i = index;">{{oemployee.name}}<button ion-button color="light" item-right (click)="doDelete(i,'oemployee')"><ion-icon name="remove"></ion-icon> </button></ion-item>
+      <ion-item *ngFor="let nemployee of nemployees; let i = index;">{{nemployee.name}}<button ion-button color="light" item-right (click)="doDelete(i,'nemployee')"><ion-icon name="remove"></ion-icon> </button></ion-item>
     </ion-item-group>
   </ion-list>
 </ion-content>

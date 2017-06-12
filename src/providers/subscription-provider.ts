@@ -1,4 +1,5 @@
 import { Subscribe } from '../models/subscribe';
+import { AlarmActionSetting } from '../models/alarm-action-setting';
 import { Observable } from 'rxjs/Rx'
 
 /*
@@ -8,5 +9,6 @@ import { Observable } from 'rxjs/Rx'
   for more info on providers and Angular 2 DI.
 */
 export abstract class SubscriptionProvider  {
-  abstract getSubscribed() : Observable<Subscribe[]>;
+  abstract getSubscribed(empId:string, alarmtype?:string, pattern?: string) : Observable<Subscribe[]>;
+  abstract getNotSubscribed(empId:string, alarmtype?:string, pattern?: string) : Observable<Subscribe[]>;
 }

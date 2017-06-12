@@ -6,8 +6,10 @@ export class Subscribe
     {
 
     }
-    alarmID: string;
-    alarmType: string;
-    createUserEmpId: string;
-    alarmActions: AlarmAction[];
+    // alarmID: string;
+    // alarmType: string;
+    // createUserEmpId: string;
+    // alarmActions: AlarmAction[];
+    alarmId: string;
+    description: string;
 }

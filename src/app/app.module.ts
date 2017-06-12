@@ -33,7 +33,8 @@ import { EmployeeComponent } from '../component/employee/employee.component'
 import { GroupEditComponent } from '../component/group-edit/group-edit.component'
 import { MessageCategoryComponent } from '../component/message-category/message-category.component'
 import { SubscriptionComponent } from '../component/subscription/subscription.component'
-import { DepartmentComponent } from '../component/department/department.component';
+import { NosubscriptionComponent } from '../component/nosubscription/nosubscription.component'
+import { DepartmentComponent } from '../component/department/department.component'
 import { MessageProvider } from '../providers/message-provider'
 import { GroupProvider } from '../providers/group-provider'
 import { DepartmentProvider } from '../providers/department-provider'
@@ -43,21 +44,24 @@ import { AccountProvider } from '../providers/account-provider'
 import { EmployeeProvider } from '../providers/employee-provider'
 import { ExtraInfoProvider } from '../providers/extrainfo-provider'
 import { SubscriptionProvider } from '../providers/subscription-provider'
+import { AlarmProvider } from '../providers/alarm-provider'
+import { MappGroupProvider } from '../providers/mappgroup-provider'
 import { UmdGroupProvider } from '../providers/umd-group-provider'
+import { UmdGroupDetailProvider } from '../providers/umd-group-detail-provider'
 import { UmdMessageProvider } from '../providers/umd-message-provider'
 import { UmdEmployeeProvider } from '../providers/umd-employee-provider'
 import { UmdDepartmentProvider } from '../providers/umd-department-provider'
 import { UmdGeneralDataProvider } from '../providers/umd-general-data-provider'
-import { AlarmSubjectProvider } from '../providers/alarm-subject-provider'
-import { MockAlarmSubjectProvider } from '../mocks/providers/mock-alarm-subject-provider'
+import { UmdSubscriptionProvider } from '../providers/umd-subscription-provider'
+import { UmdAlarmProvider } from '../providers/umd-alarm-provider'
 import { MockEmployeeProvider } from '../mocks/providers/mock-employee-provider'
 import { MockGroupProvider } from '../mocks/providers/mock-group-provider'
+import { MockGroupDetailProvider } from '../mocks/providers/mock-group-detail-provider'
 import { MockDepartmentProvider } from '../mocks/providers/mock-department-provider'
 import { MockGeneralDataProvider } from '../mocks/providers/mock-general-data-provider'
 import { MockMappGroupProvider } from '../mocks/providers/mock-mappgroup-provider'
 import { MockMessageProvider } from '../mocks/providers/mock-message-provider'
 import { MockSubscriptionProvider } from '../mocks/providers/mock-subscription-provider'
-import { MappGroupProvider } from '../providers/mappgroup-provider'
 import { MockAccountProvider } from '../mocks/providers/mock-account-provider'
 @NgModule({
   declarations: [
@@ -88,7 +92,8 @@ import { MockAccountProvider } from '../mocks/providers/mock-account-provider'
     DepartmentSelectPage,
     ConfigPage,
     TabsPage,
-    DepartmentComponent
+    DepartmentComponent,
+    NosubscriptionComponent
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -126,8 +131,8 @@ import { MockAccountProvider } from '../mocks/providers/mock-account-provider'
             , {provide: MessageProvider, useClass: MockMessageProvider}
             , AppConfig
             , ExtraInfoProvider
-            , {provide: SubscriptionProvider, useClass: MockSubscriptionProvider}
-            , {provide: AlarmSubjectProvider, useClass: MockAlarmSubjectProvider}
+            , {provide: SubscriptionProvider, useClass: UmdSubscriptionProvider}
+            , {provide: AlarmProvider, useClass: UmdAlarmProvider}
             , {provide: MappGroupProvider, useClass: MockMappGroupProvider}
             , {provide: AccountProvider, useClass: MockAccountProvider}
             , StatusBar

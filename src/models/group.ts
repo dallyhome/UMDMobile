@@ -6,6 +6,6 @@ export class Group
     }
     groupId: string;
     groupName: string;
-    owner: string;
+    // owner: string;
     description: string;
 }

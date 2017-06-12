@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Api } from '../../providers/api';
 import { Subscribe } from '../../models/subscribe';
+import { AlarmActionSetting } from '../../models/alarm-action-setting';
 import { SUBSCRIPTIONS } from '../SUBSCRIPTIONS';
 import { SubscriptionProvider } from '../../providers/subscription-provider'
 
@@ -15,8 +16,12 @@ import { Observable } from 'rxjs/Rx';
 */
 @Injectable()
 export class MockSubscriptionProvider implements SubscriptionProvider{
-  getSubscribed() : Observable<Subscribe[]>
+  getSubscribed(empId:string, alarmtype?:string, pattern?: string) : Observable<Subscribe[]>
   {
     return Observable.from([SUBSCRIPTIONS]);
+  }
+  getNotSubscribed(empId:string, alarmtype?:string, pattern?: string) : Observable<Subscribe[]>
+  {
+    return Observable.from([]);
   }
 }

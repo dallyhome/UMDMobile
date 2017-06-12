@@ -18,7 +18,7 @@ export class UmdDepartmentProvider implements DepartmentProvider {
      let headers = new Headers({ 'Content-Type': 'application/json' });
      let options = new RequestOptions({ headers: headers });
 
-     let url = 'http://c4c010685.cminl.oa/UMD/Services/UMDDataService.svc/GetDepartmentData';
+     let url = Api.getHttpUrl('GetDepartmentData');
 
      let body = {"Keyword": `${pattern}`};
      let err = "";

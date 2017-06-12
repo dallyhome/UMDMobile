@@ -15,7 +15,7 @@ export class UmdGeneralDataProvider implements GeneralDataProvider {
   getAlarmTypes() : Observable<string[]>
   {
 
-     let url = 'http://c4c010685.cminl.oa/UMD/Services/UMDDataService.svc/GetAlarmTypes';
+     let url = Api.getHttpUrl('GetAlarmTypes');
 
      console.log('get start');
      return this.http.get(url).map(res => 

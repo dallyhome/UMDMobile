@@ -4,7 +4,11 @@ import { MenuController } from 'ionic-angular';
 import { Group } from '../../models/group';
 import { Employee } from '../../models/employee';
 import { PeopleSearchPage } from '../people-search/people-search';
+import { GroupsPage } from '../groups/groups';
 import { DepartmentSelectPage } from '../department-select/department-select';
+import { GroupProvider } from '../../providers/group-provider'
+import { AccountProvider } from '../../providers/account-provider'
+
 
 @Component({
   selector: 'page-group-edit',
@@ -12,10 +16,23 @@ import { DepartmentSelectPage } from '../department-select/department-select';
 })
 export class GroupEditPage {
   group: Group
-  nemployees: string[] = [];
+  oemployees: Employee[] = [];
+  dempStr= [];  //刪除原先群組人員
+  nemployees: Employee[] = [];
+  nempStr=[];  //新增群組人員
   // items: string[] = ['CIM'];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menu: MenuController) {
-    this.group = this.navParams.get('group');
+  isSuccess: boolean;
+  groupName: string ="";
+  description: string ="";
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menu: MenuController,public GroupProvider: GroupProvider
+                                                                                                     ,public accountProvider: AccountProvider) {
+          this.group = this.navParams.get('group');
+          var me = this;
+          if (this.group != null){
+          this.groupName = this.group.groupName;
+          this.description = this.group.description;
+          this.GroupProvider.getGroupEmployee(this.group.groupId).subscribe(m => me.oemployees = m);
+          }
   }
 
   SearchClick()
@@ -35,9 +52,31 @@ export class GroupEditPage {
          });
   }
 
-  doDelete(i): void
+  doDelete(i,emptype: string): void
   {
-   this.nemployees.splice(i, 1);   
+    if(emptype ==="oemployee"){
+     this.dempStr.push(this.oemployees[i].empId);
+     this.oemployees.splice(i, 1);   
+   }else if (emptype ==="nemployee"){
+     this.nemployees.splice(i, 1);
+   }
+  }
+
+  done()
+  {
+      this.nemployees.forEach(employee => {
+            this.nempStr.push(employee.empId);    
+      });
+
+      if (this.group != null){
+          this.GroupProvider.updateGroup(this.group.groupId,this.groupName,this.description,this.dempStr,this.nempStr,
+                                         this.accountProvider.getInxAccount().empNo).subscribe(m => this.isSuccess = m);
+      }else
+      {
+          this.GroupProvider.addGroup(this.groupName,this.description,this.nempStr,
+                                      this.accountProvider.getInxAccount().empNo).subscribe(m => this.isSuccess = m);
+      }
+     this.navCtrl.pop();
   }
 
 }

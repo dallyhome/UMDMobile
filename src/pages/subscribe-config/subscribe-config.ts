@@ -7,6 +7,10 @@ import { DepartmentSelectPage } from '../department-select/department-select';
 import { SubscribeMappgroupPage } from '../subscribe-mappgroup/subscribe-mappgroup';
 import { Events} from 'ionic-angular';
 import { Platform, ActionSheetController } from 'ionic-angular'
+import { Subscribe } from '../../models/subscribe';
+import { AlarmAction } from '../../models/alarm-action';
+import { AlarmActionSetting } from '../../models/alarm-action-setting';
+import { AlarmProvider } from '../../providers/alarm-provider';
 
 /*
   Generated class for the SubscribeConfig page.
@@ -26,9 +30,21 @@ export class SubscribeConfigPage {
   pemployees: string[] = [];
   mappgroups: string[] = [];
   mode: string;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events, public platform: Platform,
-    public actionsheetCtrl: ActionSheetController) {
+  subscription: Subscribe;
+  alarmtype: string;
+  alarmActionSettings: AlarmActionSetting[] = [];
+  oalarmActions: AlarmAction[] = [];
+  nalarmActions: AlarmAction[] = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events, public platform: Platform
+                                           , public provider: AlarmProvider, public actionsheetCtrl: ActionSheetController) {
+          this.subscription = this.navParams.get('subscription');
+          this.alarmtype = this.navParams.get('alarmtype');
+          if (this.subscription != null)
+          {
+             this.provider.getAlarmActionSetting(this.subscription.alarmId).subscribe(
+                 res => this.alarmActionSettings = res
+             ); 
+          }
   }
 
   ionViewDidLoad() {

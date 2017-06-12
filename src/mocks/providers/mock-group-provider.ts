@@ -3,6 +3,9 @@ import { Http } from '@angular/http';
 import { Api } from '../../providers/api';
 import { Group } from '../../models/group';
 import { GROUPS } from '../GROUPS'
+import { Employee } from '../../models/employee';
+import { GroupDetail } from '../../models/group-detail';
+import { GROUPDETAILS } from '../GROUP-DETAILS'
 import { GroupProvider } from '../../providers/group-provider'
 import { Observable } from 'rxjs/Rx'
 
@@ -49,11 +52,35 @@ export class MockGroupProvider implements GroupProvider {
 
     return Observable.from([output]);
   }
-  updateGroup(user: string, group: Group) 
+
+  getGroupEmployee(groupId: string) : Observable<Employee[]>
   {
-    return null;
+    let output: Employee[] = [];
+    let bl: boolean = false;
+     GROUPDETAILS.forEach(element => {
+       if (bl === false) {
+         if (groupId === element.groupId)
+         {
+         output = element.groupUserList;
+         bl = true;
+         }
+       }
+    });
+    
+     return Observable.from([output]);
   }
-  deleteGroup(user: string, groupId: string) 
+
+  addGroup(groupName: string,description:string,groupUsers:string[],empId:string): Observable<boolean>
+  {
+    return  Observable.from([true]);
+  }
+
+  updateGroup(groupId: string, groupName: string, description:string,leftGroupUsers:string[],newGroupUsers:string[],empId:string): Observable<boolean>
+  {
+    return  Observable.from([true]);
+  }
+  
+  deleteGroup(groupId: string,empId: string): Observable<boolean>
   {
     return null;
   }

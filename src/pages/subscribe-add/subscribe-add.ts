@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { SubscribeConfigPage } from '../subscribe-config/subscribe-config';
-import { AlarmSubjectProvider } from '../../providers/alarm-subject-provider'
-import { AlarmSubject } from '../../models/alarm-subject';
+import { SubscriptionProvider } from '../../providers/subscription-provider'
+import { Subscribe } from '../../models/subscribe';
+import { AccountProvider } from '../../providers/account-provider'
+// import { AlarmSubjectProvider } from '../../providers/alarm-subject-provider'
+// import { AlarmSubject } from '../../models/alarm-subject';
 
 /*
   Generated class for the SubscribeAdd page.
@@ -15,12 +18,18 @@ import { AlarmSubject } from '../../models/alarm-subject';
   templateUrl: 'subscribe-add.html'
 })
 export class SubscribeAddPage {
-category = String;
-alarmsubjects: AlarmSubject[] = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public provider: AlarmSubjectProvider) {
+alarmtype: string;
+// alarmsubjects: AlarmSubject[] = [];
+nosubscriptions: Subscribe[] = [];
+pattern : string;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public provider: SubscriptionProvider  
+                                                                        , public accountProvider: AccountProvider) {
     var me = this;
-    this.category = this.navParams.get('category');
-    this.provider.getAlarmSubjects().subscribe(m => me.alarmsubjects = m);   
+    this.pattern="";
+    this.alarmtype = this.navParams.get('alarmtype');
+    this.provider.getNotSubscribed(this.accountProvider.getInxAccount().empNo,this.alarmtype,this.pattern).subscribe(
+         res => this.nosubscriptions = res
+       );  
   }
 
   ionViewDidLoad() {
@@ -29,7 +38,16 @@ alarmsubjects: AlarmSubject[] = [];
 
   gotoConfig(): void
   {
-      this.navCtrl.push(SubscribeConfigPage, {category:this.category});
+      this.navCtrl.push(SubscribeConfigPage, {alarmtype:this.alarmtype});
   }
+
+  onInput($event)
+  {
+    var me = this;
+     this.provider.getNotSubscribed(this.accountProvider.getInxAccount().empNo,this.alarmtype,this.pattern).subscribe(
+         res => this.nosubscriptions = res
+       ); 
+  }
+
 
 }

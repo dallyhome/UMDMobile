@@ -1,5 +1,7 @@
     <button ion-item>
         <ion-icon [name]="!checked ? '' : 'checkmark'" item-left></ion-icon>
-        <ion-label>{{department.deptId}}</ion-label>
-        <ion-label>{{department.deptName}}</ion-label>
+        <ion-label>
+            <h2>{{department.deptId}}</h2>
+            <p>{{department.deptName}}</p>
+        </ion-label>
     </button>

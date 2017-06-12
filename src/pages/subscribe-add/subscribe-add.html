@@ -11,15 +11,20 @@
         <!--<ion-icon name="checkmark"></ion-icon>-->
       </button>
       <!--</ion-buttons><ion-title>Message</ion-title>-->
-    </ion-buttons><ion-title>{{category}}未訂閱清單</ion-title>
+    </ion-buttons><ion-title>{{alarmtype}}未訂閱清單</ion-title>
   </ion-navbar>
 
 
 </ion-header>
 
 <ion-content padding>
- <ion-searchbar ></ion-searchbar>
+   <ion-searchbar
+    [(ngModel)]="pattern"
+    [showCancelButton]="shouldShowCancel"
+    (ionInput)="onInput($event)"
+    (ionCancel)="onCancel($event)">
+  </ion-searchbar>
   <ion-list>
-  <ion-item *ngFor="let alarmsubject of alarmsubjects"><ion-label>{{alarmsubject.alarmID}}</ion-label><ion-checkbox ></ion-checkbox></ion-item>
+      <nosubscription *ngFor="let nosubscription of nosubscriptions" [nosubscription]="nosubscription" ></nosubscription>
   </ion-list>
 </ion-content>

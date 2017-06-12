@@ -6,16 +6,29 @@
         <!--<ion-icon name="checkmark"></ion-icon>-->
       </button>
       <!--</ion-buttons><ion-title>Message</ion-title>-->
-    </ion-buttons><ion-title>{{category}}通知設定</ion-title>
+    </ion-buttons><ion-title>{{alarmtype}}通知設定 </ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content>
+<!--<ion-card>
+  <ion-card-header>
+    <p>{{subscription.alarmId}}<p>
+  </ion-card-header>
+    <ion-card-content padding>
+    <p>說明:{{subscription.description}}</p>
+  </ion-card-content>
+</ion-card>-->
   <ion-list>
     <ion-item-group>
       <ion-item-divider color="light">MAIL<button ion-button item-right (click)="openMenu(1)"><ion-icon name="add"></ion-icon> </button></ion-item-divider>
         <!--<ng-container *ngIf="type == 'MAIL'">-->
+        <ion-item *ngFor="let alarmAction of alarmActionSettings;  let i = index;">
+           <ion-label *ngIf="alarmAction.settingType === 'M'">{{alarmAction.mailRecipient}}
+           </ion-label>
+          <button ion-button color="light" item-right  (click)="doDelete('group',i)"><ion-icon name="remove"></ion-icon></button>
+        </ion-item>             
         <ion-item *ngFor="let group of groups; let i = index;">{{group.groupName}}<button ion-button color="light" item-right  (click)="doDelete('group',i)"><ion-icon name="remove"></ion-icon> </button></ion-item>   
         <ion-item *ngFor="let employee of employees; let i = index;">{{employee.name}}<button ion-button color="light" item-right  (click)="doDelete('employee',i)"><ion-icon name="remove"></ion-icon> </button></ion-item>   
         <ion-item *ngFor="let department of departments; let i = index;">{{department.deptName}}<button ion-button color="light" item-right  (click)="doDelete('department',i)"><ion-icon name="remove"></ion-icon> </button></ion-item>   

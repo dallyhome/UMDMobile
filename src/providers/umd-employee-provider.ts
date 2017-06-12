@@ -27,10 +27,11 @@ export class UmdEmployeeProvider implements EmployeeProvider {
       let options = new RequestOptions({ headers: headers });
 
   //     let url = 'http://localhost:3000/getGroups';
-        let url = 'http://c4c010685.cminl.oa/UMD/Services/UMDDataService.svc/GetEmployeeData';
+        // let url = 'http://c4c010685.cminl.oa/UMD/Services/UMDDataService.svc/GetEmployeeData';
   //     let url = 'http://tnvtwebapi.cminl.oa/NewWebApi/Agency/api/service/??????';
+      let url = Api.getHttpUrl('GetEmployeeData');
 
-      let body = {"EmpId": `${empID}`, "Keyword": `${pattern}`};
+      let body = {"EmpId": `${empID}`, "Keyword": `${pattern}`, "QueryPage": 1};
 
       let err = "";
       console.log('post start');

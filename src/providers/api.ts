@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular 2 DI.
 */
+
 @Injectable()
 export class Api {
   static toCamel(o): any {
@@ -36,6 +37,43 @@ export class Api {
     }
     return newO
   }
-
-
+  
+  static toPascal(o): any {
+    var newO, origKey, newKey, value
+    if (o instanceof Array) {
+      newO = []
+      for (origKey in o) {
+        value = o[origKey]
+        if (typeof value === "object") {
+          value = this.toPascal(value)
+        }
+        newO.push(value)
+      }
+    } else {
+      newO = {}
+      for (origKey in o) {
+        if (o.hasOwnProperty(origKey)) {
+          newKey = (origKey.charAt(0).toUpperCase() + origKey.slice(1) || origKey).toString()
+          value = o[origKey]
+          if (value !== null && (value.constructor === Object || value instanceof Array)) {
+            value = this.toPascal(value)
+          }
+          newO[newKey] = value
+        }
+      }
+    }
+    return newO
+  }
+  
+  static getHttpUrl(funcName: string): any {
+     let apiConnect: string = "CIM";  //MIS,CIM
+     let serverUrl: string = "";
+     if (apiConnect === "CIM"){
+         serverUrl = "http://c4c010685.cminl.oa/UMD/Services/UMDDataService.svc/";
+        //serverUrl = "http://c3c003309.cminl.oa/UMD/Services/UMDDataService.svc/";
+     }else if (apiConnect === "MIS"){
+      serverUrl = "http://ptnecimumd.cminl.oa/Services/UMDDataService.svc/";
+     }
+     return serverUrl + funcName;
+  }
 }

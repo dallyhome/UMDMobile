@@ -17,9 +17,9 @@ export class SubscribePage {
       );   
   }
 
-  gotoEdit(category:string): void
+  gotoEdit(alarmtype:string): void
   {
-      this.navCtrl.push(SubscribeEditPage, {'category': category});
+      this.navCtrl.push(SubscribeEditPage, {'alarmtype': alarmtype});
   }
 
 }

@@ -4,6 +4,7 @@ import { SubscribeAddPage } from '../subscribe-add/subscribe-add';
 import { SubscriptionProvider } from '../../providers/subscription-provider'
 import { Subscribe } from '../../models/subscribe';
 import { SubscribeConfigPage } from '../subscribe-config/subscribe-config';
+import { AccountProvider } from '../../providers/account-provider'
 /*
   Generated class for the SubscribeEdit page.
 
@@ -15,12 +16,13 @@ import { SubscribeConfigPage } from '../subscribe-config/subscribe-config';
   templateUrl: 'subscribe-edit.html'
 })
 export class SubscribeEditPage {
-category: string;
+alarmtype: string;
 // filterargs: {alarmType: 'RTQCS'};  
 subscriptions: Subscribe[] = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public provider: SubscriptionProvider) {
-       this.category = this.navParams.get('category');
-       this.provider.getSubscribed().subscribe(
+  constructor(public navCtrl: NavController, public navParams: NavParams, public provider: SubscriptionProvider
+                                                                        , public accountProvider: AccountProvider) {
+       this.alarmtype = this.navParams.get('alarmtype');
+       this.provider.getSubscribed(this.accountProvider.getInxAccount().empNo,this.alarmtype,'').subscribe(
          res => this.subscriptions = res
        );   
   }
@@ -31,12 +33,12 @@ subscriptions: Subscribe[] = [];
   
   gotoAdd(): void
   {
-      this.navCtrl.push(SubscribeAddPage,  {category: this.category});
+      this.navCtrl.push(SubscribeAddPage,  {alarmtype: this.alarmtype});
   }
 
   gotoEdit(subscription: Subscribe): void
   {
-      // this.navCtrl.push(SubscribeConfigPage, {'subscription': subscription});
+      this.navCtrl.push(SubscribeConfigPage, {'subscription': subscription,'alarmtype': this.alarmtype});
   }
 
 

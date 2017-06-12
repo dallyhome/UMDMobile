@@ -14,11 +14,11 @@ import { AccountProvider } from '../../providers/account-provider'
 })
 export class GroupsPage {
   groups : Group[];
-
+  isSuccess : boolean;
   constructor(public navCtrl: NavController, public provider: GroupProvider
                                     , public accountProvider: AccountProvider) {
       var me: GroupsPage = this;
-      provider.getGroups(this.accountProvider.getInxAccount().empNo,'').subscribe(
+      this.provider.getGroups(this.accountProvider.getInxAccount().empNo,'').subscribe(
           value => me.groups = value,
           error => me.groups = [],
           () => console.log("done")
@@ -32,7 +32,11 @@ export class GroupsPage {
 
   doDelete(group: Group): void
   {
-   this.groups.splice(this.groups.indexOf(group), 1);   
+   this.groups.splice(this.groups.indexOf(group), 1);
+   this.provider.deleteGroup(group.groupId ,this.accountProvider.getInxAccount().empNo).subscribe(
+          value => this.isSuccess = value,
+          () => console.log("deleteGroup" +this.isSuccess)
+      );
   }
 
 
